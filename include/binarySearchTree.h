@@ -17,7 +17,7 @@ class binarySearchTree {
     struct Node {
         DataType data;  //!< Type of information to be stored in the container.
         Node* left;     //!< Pointer to left Node.
-        Node* rigth;    //!< Pointer to rigth Node.
+        Node* right;    //!< Pointer to right Node.
 
         Node(const DataType& _data = DataType{}, Node* n = nullptr, Node* p = nullptr) : data{_data} {}
     };
@@ -51,6 +51,7 @@ class binarySearchTree {
     bool isComplete(void);
     bool isFull(void);
     std::string toString(void);
+    int simetric(Node *source, DataType key, int iteration);
 };
 
 }  // namespace bst

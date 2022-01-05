@@ -34,7 +34,14 @@ DataType binarySearchTree<DataType>::median(void) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType>
-int binarySearchTree<DataType>::findPositionOfElement(ConstReference _data) {}
+int binarySearchTree<DataType>::findPositionOfElement(ConstReference _data) {
+    int temp = simetric(tree, _data, 0);
+    if(temp == 0){
+        cout << "Element not found!" << endl;
+    }else{
+        cout << "Element in position : " << temp << endl;
+    }
+}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType>
@@ -51,5 +58,20 @@ bool binarySearchTree<DataType>::isFull(void) {}
 // TODO: Fazer documentação doxygen
 template <typename DataType>
 std::string binarySearchTree<DataType>::toString(void) {}
+
+// TODO: Fazer documentação doxygen
+template <typename DataType>
+int binarySearchTree<DataType>::simetric(Node *source, DataType key, int iteration) {
+    if(source != NULL){
+        cout << "Value:" << source->data << endl;
+        if(source->data == key){
+            return iteration;
+        }
+        iteration++
+        this->simetric(source->left, key, iteration);
+        this->simetric(source->right, key, iteration);
+    }
+    return 0;
+}
 
 }  // namespace bst
