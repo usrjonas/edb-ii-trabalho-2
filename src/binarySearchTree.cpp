@@ -20,7 +20,28 @@ binarySearchTree<DataType, KeyType>::~binarySearchTree(void) {}
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
 binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::insert(DataConstReference _data,
-                                                                                       KeyConstReference _key) {}
+                                                                                       KeyConstReference _key) {
+    Node* pointerFather = raw_pointer;
+    int controlVariable = -1;
+
+    search(_key, pointerFather, controlVariable);
+
+    if (controlVariable != 1 || controlVariable != -1) {
+        Node* pointerSon = new Node(_data _key);
+        if (!controlVariable)
+            raw_pointer = pointerSon;
+        else {
+            if (controlVariable == 2) {
+                pointerFather->left = pointerSon;
+
+            } else {
+                pointerFather->right = pointerSon;
+            }
+        }
+    }
+
+    return pointerSon;
+}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
@@ -30,6 +51,10 @@ binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
 binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::clear(void) {}
+
+// TODO: Fazer documentação doxygen
+template <typename DataType, typename KeyType>
+int binarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointer, int& controlVariable) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>

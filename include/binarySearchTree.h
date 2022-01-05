@@ -48,6 +48,7 @@ class binarySearchTree {
     Node* insert(DataConstReference _data, KeyConstReference _key);
     Node* remove(DataConstReference _data, KeyConstReference _key);
     Node* clear(void);
+    int search(KeyConstReference _key, Node* pointer, int& controlVariable);
 
     //=== Methods Acess
     DataType median(void);
