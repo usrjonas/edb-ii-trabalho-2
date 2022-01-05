@@ -9,23 +9,28 @@ namespace bst {  // binary search tree
  * @brief A class representing a binary search tree.
  *
  * @tparam DataType Type of data the container will store.
+ * @tparam KeyType Type of key the container will store.
  */
-template <typename DataType>
+template <typename DataType, typename KeyType>
 class binarySearchTree {
    private:
     //=== The data node.
     struct Node {
-        DataType data;  //!< Type of information to be stored in the container.
+        DataType data;  //!< Information to be stored in the container.
+        KeyType key;    //!< Key to my Nome.
         Node* left;     //!< Pointer to left Node.
         Node* right;    //!< Pointer to right Node.
 
-        Node(const DataType& _data = DataType{}, Node* n = nullptr, Node* p = nullptr) : data{_data} {}
+        Node(const DataType& _data = DataType{}, const KeyType& _key = KeyType{}, Node* l = nullptr, Node* r = nullptr)
+            : data{_data}, key{_key}, left{l}, right{r} {}
     };
 
     //=== Some aliases to help writing a clearer code.
    public:
-    using Reference = DataType&;             //!< reference to the value.
-    using ConstReference = const DataType&;  //!< const reference to the value.
+    using DataReference = DataType&;             //!< reference to the data value.
+    using DataConstReference = const DataType&;  //!< const reference to the data value.
+    using KeyReference = KeyType&;               //!< reference to the key value.
+    using KeyConstReference = const KeyType&;    //!< const reference to the key value.
 
     //=== Private members.
    private:
@@ -36,22 +41,22 @@ class binarySearchTree {
 
     //=== Constructors and Destructors
     binarySearchTree(void);
-    binarySearchTree(ConstReference _data) : binarySearchTree();
+    binarySearchTree(DataConstReference _data, KeyConstReference _key) : binarySearchTree();
     ~binarySearchTree(void);
 
     //=== Methods Modifiers
-    Node* insert(ConstReference _data);
-    Node* remove(ConstReference _data);
+    Node* insert(DataConstReference _data, KeyConstReference _key);
+    Node* remove(DataConstReference _data, KeyConstReference _key);
     Node* clear(void);
 
     //=== Methods Acess
     DataType median(void);
-    int findPositionOfElement(ConstReference _data);
+    int findPositionOfElement(KeyConstReference _key);
     DataType elementInPosition(int position);
     bool isComplete(void);
     bool isFull(void);
     std::string toString(void);
-    int simetric(Node *source, DataType key, int iteration);
+    int simetric(Node* source, KeyConstReference key, int iteration);
 };
 
 }  // namespace bst
