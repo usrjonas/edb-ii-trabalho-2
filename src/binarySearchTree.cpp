@@ -10,7 +10,7 @@ binarySearchTree<DataType, KeyType>::binarySearchTree(void) : raw_pointer{nullpt
 template <typename DataType, typename KeyType>
 binarySearchTree<DataType, KeyType>::binarySearchTree(DataConstReference _data, KeyConstReference _key)
     : binarySearchTree() {
-    raw_pointer = new node(_data);
+    raw_pointer = new node(_data, _key);
 }
 
 // TODO: Fazer documentação doxygen
