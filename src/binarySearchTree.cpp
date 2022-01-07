@@ -27,7 +27,7 @@ binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::
     search(_key, pointerFather, controlVariable);
 
     if (controlVariable != 1 || controlVariable != -1) {
-        Node* pointerSon = new Node(_data _key);
+        Node* pointerSon = new Node(_data, _key);
         if (!controlVariable)
             raw_pointer = pointerSon;
         else {
@@ -46,7 +46,51 @@ binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
 binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::remove(DataConstReference _data,
-                                                                                       KeyConstReference _key) {}
+                                                                                       KeyConstReference _key) {
+    Node* pointerFather = raw_pointer;
+    Node* pointerSon = nullptr;
+
+    int controlVariable = -1;
+
+    search(_key, pointerFather, pointerSon, controlVariable);
+
+    /* TODO:
+        É necessário saber quem é o pai.
+        É necessário saber se o filho é esquerdo ou direito ao pai.
+        Ver o caso que ele é o primeiro elemento e não tem pai.
+    */
+
+    if (controlVariable == 1) {
+        const bool sonHasEmptyLeftSubTree = pointerSon->left == nullptr;
+        const bool sonHasEmptyRightSubTree = pointerSon->right == nullptr;
+
+        const bool sonIsLeft = pointerFather->left == pointerSon;
+
+        if (sonHasLeftEmptySubTree) {
+            if (sonIsLeft) {
+                pointerFather->left = pointerSon->right;
+            } else {
+                pointerFather->right = pointerSon->right;
+            }
+        } else if (sonHasRightEmptySubTree) {
+            if (sonIsLeft) {
+                pointerFather->left = pointerSon->left;
+            } else {
+                pointerFather->right = pointerSon->left;
+            }
+        } else {
+            Node* pointerGreatestLeftElement = findGreatestLeftElement();
+
+            pointerSon->key = pointerGreatestLeftElement->key;
+            pointerSon->data = pointerGreatestLeftElement->data;
+
+            pointerSon = pointerGreatestLeftElement;
+        }
+        delete pointerSon;
+    }
+
+    return nullptr;
+}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
