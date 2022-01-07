@@ -29,30 +29,40 @@ binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-void binarySearchTree<DataType, KeyType>::search(Node* pointerFather, KeyConstReference _key, int controlVariable) {
-    if (pointerFather != nullptr) {
-        if (pointerFather->key == _key) {
+void binarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerSon, int& controlVariable) {
+    Node* pointerFather = nullptr;
+    int position = 0;
+
+    search(_key, pointerFather, pointerSon, position, controlVariable);
+}
+
+// TODO: Fazer documentação doxygen
+template <typename DataType, typename KeyType>
+void binarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerFather, Node* pointerSon,
+                                                 int& position, int& controlVariable) {
+    if (pointerSon != nullptr) {
+        if (pointerSon->key == _key) {
             controlVariable = 1;
-        }
-        else {
-            if (_key < pointerFather->key) {
-                if (pointerFather->left == nullptr) {
+        } else {
+            if (_key < pointerSon->key) {
+                if (pointerSon->left == nullptr) {
                     controlVariable = 2;
+                } else {
+                    pointerFather = pointerSon;
+                    pointerSon = pointerSon->left;
+                    position++;
                 }
-                else {
-                    pointerFather = pointerFather->left;
-                }
-            }
-            else {
-                if (pointerFather->right == nullptr) {
+            } else {
+                if (pointerSon->right == nullptr) {
                     controlVariable = 3;
-                }
-                else {
-                    pointerFather = pointerFather->right;
+                } else {
+                    pointerFather = pointerSon;
+                    pointerSon = pointerSon->right;
+                    position++;
                 }
             }
             if (controlVariable < 1) {
-                search(pointerFather, _key, controlVariable);
+                search(_key, pointerFather, pointerSon, position, controlVariable);
             }
         }
     }
