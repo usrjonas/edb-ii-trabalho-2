@@ -89,6 +89,47 @@ binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
+void binarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerSon, int& controlVariable) {
+    Node* pointerFather = nullptr;
+    int position = 0;
+
+    search(_key, pointerFather, pointerSon, position, controlVariable);
+}
+
+// TODO: Fazer documentação doxygen
+template <typename DataType, typename KeyType>
+void binarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerFather, Node* pointerSon,
+                                                 int& position, int& controlVariable) {
+    if (pointerSon != nullptr) {
+        if (pointerSon->key == _key) {
+            controlVariable = 1;
+        } else {
+            if (_key < pointerSon->key) {
+                if (pointerSon->left == nullptr) {
+                    controlVariable = 2;
+                } else {
+                    pointerFather = pointerSon;
+                    pointerSon = pointerSon->left;
+                    position++;
+                }
+            } else {
+                if (pointerSon->right == nullptr) {
+                    controlVariable = 3;
+                } else {
+                    pointerFather = pointerSon;
+                    pointerSon = pointerSon->right;
+                    position++;
+                }
+            }
+            if (controlVariable < 1) {
+                search(_key, pointerFather, pointerSon, position, controlVariable);
+            }
+        }
+    }
+}
+
+// TODO: Fazer documentação doxygen
+template <typename DataType, typename KeyType>
 binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::clear(void) {}
 
 template <typename DataType, typename KeyType>

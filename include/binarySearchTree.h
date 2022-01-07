@@ -36,6 +36,8 @@ class binarySearchTree {
    private:
     Node* raw_pointer;
 
+    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable);
+
    public:
     //=== Public interface
 
@@ -45,6 +47,7 @@ class binarySearchTree {
     ~binarySearchTree(void);
 
     //=== Methods Modifiers
+    void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
     Node* insert(DataConstReference _data, KeyConstReference _key);
     Node* remove(DataConstReference _data, KeyConstReference _key);
     Node* clear(void);
