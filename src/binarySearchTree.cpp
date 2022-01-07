@@ -38,7 +38,21 @@ DataType binarySearchTree<DataType, KeyType>::median(void) {}
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
 int binarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
-    
+     Node* pointerFather = raw_pointer;
+    int control = -1;
+    search(_key, pointerFather, control, iterator);
+    //Private Search needs return the control position
+    if(control == 0){
+        return -2;
+        //-2 -> Empty tree.
+    }else if(control == 1){
+        return iterator;
+        //iterator must be the index of element.
+        //1 -> Element found.
+    }else{
+        return 0;
+        //0 -> Element not found.
+    }
 }
 
 // TODO: Fazer documentação doxygen
