@@ -45,6 +45,7 @@ class binarySearchTree {
     ~binarySearchTree(void);
 
     //=== Methods Modifiers
+    void search(Node* pointerFather, KeyConstReference _key, int controlVariable);
     Node* insert(DataConstReference _data, KeyConstReference _key);
     Node* remove(DataConstReference _data, KeyConstReference _key);
     Node* clear(void);
