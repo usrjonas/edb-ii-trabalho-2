@@ -36,7 +36,9 @@ class binarySearchTree {
    private:
     Node* raw_pointer;
 
-    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable);
+    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
+                bool& isSonLeft);
+    Node* findGreatestElement(Node* pointer);
 
    public:
     //=== Public interface
@@ -48,10 +50,9 @@ class binarySearchTree {
 
     //=== Methods Modifiers
     void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
-    Node* insert(DataConstReference _data, KeyConstReference _key);
-    Node* remove(DataConstReference _data, KeyConstReference _key);
-    Node* clear(void);
-    int search(KeyConstReference _key, Node* pointer, int& controlVariable);
+    void insert(DataConstReference _data, KeyConstReference _key);
+    void remove(DataConstReference _data, KeyConstReference _key);
+    void clear(void);
 
     //=== Methods Acess
     DataType median(void);
