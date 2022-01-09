@@ -63,6 +63,7 @@ template <typename DataType, typename KeyType>
 std::string binarySearchTree<DataType, KeyType>::toString(void) {}
 
 // TODO: Fazer documentação doxygen
+/*
 template <typename DataType, typename KeyType>
 int binarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
     if (source != NULL) {
@@ -75,5 +76,6 @@ int binarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReferenc
     }
     return 0;
 }
+*/
 
 }  // namespace bst
