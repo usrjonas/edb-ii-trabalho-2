@@ -83,6 +83,17 @@ DataType binarySearchTree<DataType, KeyType>::median(void) {
         this->Pre_order(raw_pointer->right);
     }
     int vector_Size = elements.size();
+    int j,k;
+    for(int i = 2; i <= vector_Size; i++){
+        k = elements[i];
+        j = i-1;
+        elements[0] = k;
+        while(k < elements[j]){
+            elements[j+1] = elements[j];
+            j--;
+        }
+        elements[j+1] = k;
+    }
     if(vector_Size % 2 == 0){
         median = vector_Size/2;
         return elements[median-1];
