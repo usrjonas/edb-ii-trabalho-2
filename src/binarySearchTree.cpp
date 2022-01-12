@@ -56,7 +56,30 @@ bool binarySearchTree<DataType, KeyType>::isComplete(void) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-bool binarySearchTree<DataType, KeyType>::isFull(void) {}
+bool binarySearchTree<DataType, KeyType>::isFull(void) {
+    if (isStrictlyBinaryTree(raw_pointer) and isComplete()) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+template <typename DataType, typename KeyType>
+bool binarySearchTree<DataType, KeyType>::isStrictlyBinaryTree(Node* _pt) {
+    if (_pt == nullptr) {
+        return true;
+    }
+    else if (_pt->left == nullptr && _pt->right == nullptr) {
+        return true;
+    }
+    else if (_pt->left != nullptr && _pt->right != nullptr) {
+        return isStrictlyBinaryTree(_pt->left) && isStrictlyBinaryTree(_pt->right);
+    }
+    else {
+        return false;
+    }
+}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>

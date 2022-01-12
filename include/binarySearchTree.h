@@ -55,6 +55,7 @@ class binarySearchTree {
     DataType elementInPosition(int position);
     bool isComplete(void);
     bool isFull(void);
+    bool isStrictlyBinaryTree(Node* _pt);
     std::string toString(void);
     int simetric(Node* source, KeyConstReference key, int iteration);
 };
