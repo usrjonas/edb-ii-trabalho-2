@@ -74,7 +74,23 @@ binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-DataType binarySearchTree<DataType, KeyType>::median(void) {}
+DataType binarySearchTree<DataType, KeyType>::median(void) {
+    vector<int>elements;
+    int control,median;
+    if(raw_pointer != nullptr){
+        this->Pre_order(raw_pointer->left);
+        elements.push_back(raw_pointer);
+        this->Pre_order(raw_pointer->right);
+    }
+    int vector_Size = elements.size();
+    if(vector_Size % 2 == 0){
+        median = vector_Size/2;
+        return elements[median-1];
+    }else{
+        median = (vector_Size+1)/2;
+        return elements[median];
+    }
+}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
