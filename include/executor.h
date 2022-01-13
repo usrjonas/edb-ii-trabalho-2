@@ -25,13 +25,13 @@ class Executor {
     //=== Private methods.
    private:
     std::string processLine(std::string line);
-    void openAndValideFile(std::ifstream& file, bool mustValidateNumbers = false);
+    void openAndValideFile(std::ifstream& file, std::string fileName, bool mustValidateNumbers = false);
     void processMutipleInserts(std::ifstream& file);
 
     //=== Public methods.
    public:
     Executor(bst::BinarySearchTree<DataType, KeyType>& tree);
-    void start(std::string inserionFileName, std::string commandFileName);
+    void start(std::string insertionFileName, std::string commandFileName);
 };
 
 #endif  // _EXECUTOR_H_

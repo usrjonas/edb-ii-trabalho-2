@@ -17,21 +17,22 @@ template <typename DataType, typename KeyType>
 Executor<DataType, KeyType>::Executor(bst::BinarySearchTree<DataType, KeyType>& tree) : tree{&tree}, leave{false} {}
 
 template <typename DataType, typename KeyType>
-void Executor<DataType, KeyType>::start(std::string inserionFileName, std::string commandFileName) {
-    std::ifstream inserionFile, commandFile;
-    openAndValideFile(inserionFile, true);
-    openAndValideFile(commandFile);
+void Executor<DataType, KeyType>::start(std::string insertionFileName, std::string commandFileName) {
+    std::ifstream insertionFile, commandFile;
+    openAndValideFile(insertionFile, insertionFileName, true);
+    openAndValideFile(commandFile, commandFileName);
 
-    processMutipleInserts(inserionFile);
+    processMutipleInserts(insertionFile);
 
     std::string line;
-    while (!leave && std::getline(file, line)) {
+    while (not leave && std::getline(commandFile, line)) {
         std::cout << processLine(line) << std::endl << std::endl;
     }
 }
 
 template <typename DataType, typename KeyType>
-void Executor<DataType, KeyType>::openAndValideFile(std::ifstream& file, bool mustValidateNumbers = false) {
+void Executor<DataType, KeyType>::openAndValideFile(std::ifstream& file, std::string fileName,
+                                                    bool mustValidateNumbers = false) {
     file.open(fileName.c_str());
 
     if (!file.is_open()) {
@@ -85,16 +86,15 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         return "LOG :: Comando Inválido <vazio>.";
     }
 
-    if (commandName == "QUIT") {
+    else if (commandName == "QUIT") {
         this->leave = true;
         return "LOG :: Execução dos testes finalizou.";
     }
 
     else if (commandName == "ENESIMO") {
-        str.clear();
         buf >> str;
+        verifyIfStringContainsOnlyNumbers(str);
 
-        ss.str(std::string);
         ss << "LOG :: ENESIMO :: Elemento que ocupa a " << str << " possição é "
            << tree->elementInPosition(std::stoi(str)) << ".";
 
@@ -102,10 +102,9 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     }
 
     else if (commandName == "POSICAO") {
-        str.clear();
         buf >> str;
+        verifyIfStringContainsOnlyNumbers(str);
 
-        ss.str(std::string);
         ss << "LOG :: POSICAO :: Elemento " << str << " encontra-se na posição "
            << tree->elementInPosition(std::stoi(str)) << ".";
 
@@ -113,21 +112,18 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     }
 
     else if (commandName == "MEDIANA") {
-        ss.str(std::string);
         ss << "LOG :: MEDIANA :: A mediana é " << tree->median(std::stoi(str)) << ".";
 
         return ss.str();
     }
 
     else if (commandName == "CHEIA") {
-        ss.str(std::string);
         ss << "LOG :: CHEIA :: A ávore " << tree->isFull(std::stoi(str)) ? "não" : std::string() << " é cheia." << ;
 
         return ss.str();
     }
 
     else if (commandName == "COMPLETA") {
-        ss.str(std::string);
         ss << "LOG :: CHEIA :: A ávore " << tree->isComplete(std::stoi(str)) ? "não"
                                                                              : std::string() << " é completa." << ;
 
@@ -135,7 +131,6 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     }
 
     else if (commandName == "IMPRIMA") {
-        ss.str(std::string);
         ss << "LOG :: IMPRIMA :: Impressão da árvore: " << tree->toString(std::stoi(str)) << std::endl
            << "------------------------------------";
 
@@ -143,24 +138,22 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     }
 
     else if (commandName == "REMOVA") {
-        str.clear();
         buf >> str;
+        verifyIfStringContainsOnlyNumbers(str);
 
         tree->remove(std::stoi(str));
 
-        ss.str(std::string);
         ss << "LOG :: REMOVA :: Elemento " << str << " removido.";
 
         return ss.str();
     }
 
     else if (commandName == "INSIRA") {
-        str.clear();
         buf >> str;
+        verifyIfStringContainsOnlyNumbers(str);
 
         tree->insert(std::stoi(str));
 
-        ss.str(std::string);
         ss << "LOG :: INSIRA :: Elemento " << str << " inserido.";
 
         return ss.str();
