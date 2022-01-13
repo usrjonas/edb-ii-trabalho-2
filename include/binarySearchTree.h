@@ -12,7 +12,7 @@ namespace bst {  // binary search tree
  * @tparam KeyType Type of key the container will store.
  */
 template <typename DataType, typename KeyType>
-class binarySearchTree {
+class BinarySearchTree {
    private:
     //=== The data node.
     struct Node {
@@ -42,9 +42,9 @@ class binarySearchTree {
     //=== Public interface
 
     //=== Constructors and Destructors
-    binarySearchTree(void);
-    binarySearchTree(DataConstReference _data, KeyConstReference _key) : binarySearchTree();
-    ~binarySearchTree(void);
+    BinarySearchTree(void);
+    BinarySearchTree(DataConstReference _data, KeyConstReference _key) : BinarySearchTree();
+    ~BinarySearchTree(void);
 
     //=== Methods Modifiers
     void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);

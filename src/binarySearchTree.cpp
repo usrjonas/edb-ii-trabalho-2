@@ -4,32 +4,32 @@ namespace bst {
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-binarySearchTree<DataType, KeyType>::binarySearchTree(void) : raw_pointer{nullptr} {}
+BinarySearchTree<DataType, KeyType>::BinarySearchTree(void) : raw_pointer{nullptr} {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-binarySearchTree<DataType, KeyType>::binarySearchTree(DataConstReference _data, KeyConstReference _key)
-    : binarySearchTree() {
+BinarySearchTree<DataType, KeyType>::BinarySearchTree(DataConstReference _data, KeyConstReference _key)
+    : BinarySearchTree() {
     raw_pointer = new node(_data, _key);
 }
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-binarySearchTree<DataType, KeyType>::~binarySearchTree(void) {}
+BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::insert(DataConstReference _data,
+BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data,
                                                                                        KeyConstReference _key) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::remove(DataConstReference _data,
+BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::remove(DataConstReference _data,
                                                                                        KeyConstReference _key) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-void binarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerSon, int& controlVariable) {
+void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerSon, int& controlVariable) {
     Node* pointerFather = nullptr;
     int position = 0;
 
@@ -38,7 +38,7 @@ void binarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* p
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-void binarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerFather, Node* pointerSon,
+void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerFather, Node* pointerSon,
                                                  int& position, int& controlVariable) {
     if (pointerSon != nullptr) {
         if (pointerSon->key == _key) {
@@ -70,15 +70,15 @@ void binarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* p
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::clear(void) {}
+BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::clear(void) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-DataType binarySearchTree<DataType, KeyType>::median(void) {}
+DataType BinarySearchTree<DataType, KeyType>::median(void) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-int binarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
+int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
     int temp = simetric(tree, _data, 0);
     if (temp == 0) {
         cout << "Element not found!" << endl;
@@ -89,23 +89,23 @@ int binarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-DataType binarySearchTree<DataType, KeyType>::elementInPosition(int position) {}
+DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-bool binarySearchTree<DataType, KeyType>::isComplete(void) {}
+bool BinarySearchTree<DataType, KeyType>::isComplete(void) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-bool binarySearchTree<DataType, KeyType>::isFull(void) {}
+bool BinarySearchTree<DataType, KeyType>::isFull(void) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-std::string binarySearchTree<DataType, KeyType>::toString(void) {}
+std::string BinarySearchTree<DataType, KeyType>::toString(void) {}
 
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-int binarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
+int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
     if (source != NULL) {
         cout << "Value:" << source->data << endl;
         if (source->data == key) {
