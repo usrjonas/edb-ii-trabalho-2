@@ -45,7 +45,7 @@ class BinarySearchTree {
 
     //=== Constructors and Destructors
     BinarySearchTree(void);
-    BinarySearchTree(DataConstReference _data, KeyConstReference _key) : BinarySearchTree();
+    BinarySearchTree(DataConstReference _data, KeyConstReference _key);
     ~BinarySearchTree(void);
 
     //=== Methods Modifiers

@@ -1,4 +1,4 @@
-#include "executor.h"
+#include "../include/executor.h"
 
 #include <iostream>
 #include <istream>
@@ -32,7 +32,7 @@ void Executor<DataType, KeyType>::start(std::string insertionFileName, std::stri
 
 template <typename DataType, typename KeyType>
 void Executor<DataType, KeyType>::openAndValideFile(std::ifstream& file, std::string fileName,
-                                                    bool mustValidateNumbers = false) {
+                                                    bool mustValidateNumbers) {
     file.open(fileName.c_str());
 
     if (!file.is_open()) {
@@ -118,14 +118,15 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     }
 
     else if (commandName == "CHEIA") {
-        ss << "LOG :: CHEIA :: A ávore " << tree->isFull(std::stoi(str)) ? "não" : std::string() << " é cheia." << ;
+        str = tree->isFull(std::stoi(str)) ? "não" : "";
+        ss << "LOG :: CHEIA :: A ávore " << str << " é cheia.";
 
         return ss.str();
     }
 
     else if (commandName == "COMPLETA") {
-        ss << "LOG :: CHEIA :: A ávore " << tree->isComplete(std::stoi(str)) ? "não"
-                                                                             : std::string() << " é completa." << ;
+        str = tree->isComplete(std::stoi(str)) ? "não" : "";
+        ss << "LOG :: CHEIA :: A ávore " << str << " é completa.";
 
         return ss.str();
     }
