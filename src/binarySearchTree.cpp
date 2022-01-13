@@ -96,7 +96,7 @@ binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::
     else if (pointer->right == nullptr)
         return pointer;
     else
-        return findMax(pointer->right);
+        return findGreatestElement(pointer->right);
 }
 
 template <typename DataType, typename KeyType>
