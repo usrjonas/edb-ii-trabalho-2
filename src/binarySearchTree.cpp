@@ -78,10 +78,10 @@ std::string binarySearchTree<DataType, KeyType>::toString(void) {
         while(!MyQueue.Empty){
             node = MyQueue.pop(); //try 'front'
             print_tree += toString(node->data) + " ";
-            if(node->left != NULL){
+            if(node->left != nullptr){
                 MyQueue.push(node->left);
             }
-            if(node->right != NULL){
+            if(node->right != nullptr){
                 MyQueue.push(node->right);
             }
             return print_tree;
