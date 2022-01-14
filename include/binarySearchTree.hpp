@@ -1,7 +1,8 @@
 #ifndef _BINARY_SEARCH_TREE_H_
 #define _BINARY_SEARCH_TREE_H_
 
-#include <string>  // std::string
+#include <iostream>  // st::cout, std::cin, std::endl
+#include <string>    // std::string
 
 namespace bst {  // binary search tree
 
@@ -66,4 +67,5 @@ class BinarySearchTree {
 
 }  // namespace bst
 
+#include "binarySearchTree.inl"
 #endif  // _BINARY_SEARCH_TREE_H_

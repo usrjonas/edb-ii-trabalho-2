@@ -1,13 +1,13 @@
 #ifndef _EXECUTOR_H_
 #define _EXECUTOR_H_
 
-#include <fstream>  // std::ifstream
-#include <istream>  // std::istringstream
-#include <ostream>  // st::cout, std::cin, std::endl
-#include <sstream>  // std::stringstream
-#include <string>   // std::string
+#include <fstream>   // std::ifstream
+#include <iostream>  // st::cout, std::cin, std::endl
+#include <istream>   // std::istringstream
+#include <sstream>   // std::stringstream
+#include <string>    // std::string
 
-#include "./binarySearchTree.h"
+#include "binarySearchTree.hpp"
 
 /**
  * @brief A class to execute tests for a binary search tree.
@@ -34,4 +34,5 @@ class Executor {
     void start(std::string insertionFileName, std::string commandFileName);
 };
 
+#include "executor.inl"
 #endif  // _EXECUTOR_H_

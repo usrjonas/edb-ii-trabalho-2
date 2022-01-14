@@ -1,10 +1,4 @@
-#include "../include/executor.h"
-
-#include <iostream>
-#include <istream>
-#include <ostream>
-#include <queue>
-#include <sstream>
+#include "executor.hpp"
 
 void verifyIfStringContainsOnlyNumbers(const std::string& str) {
     if (str.find_first_not_of("0123456789 ") != std::string::npos) {
@@ -106,7 +100,7 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         verifyIfStringContainsOnlyNumbers(str);
 
         ss << "LOG :: POSICAO :: Elemento " << str << " encontra-se na posição "
-           << tree->elementInPosition(std::stoi(str)) << ".";
+           << tree->findPositionOfElement(std::stoi(str)) << ".";
 
         return ss.str();
     }

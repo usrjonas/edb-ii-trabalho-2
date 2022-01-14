@@ -1,7 +1,7 @@
 #include <iostream>  // cout, cin, endl, cerr
 
-#include "../include/binarySearchTree.h"
-#include "../include/executor.h"
+#include "../include/binarySearchTree.hpp"
+#include "../include/executor.hpp"
 
 int main(int argc, char *argv[]) {
     // Validação inicial dos argumentos

@@ -1,4 +1,4 @@
-#include "../include/binarySearchTree.h"
+#include "binarySearchTree.hpp"
 
 namespace bst {
 
