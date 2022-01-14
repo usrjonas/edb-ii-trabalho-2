@@ -3,18 +3,6 @@
 namespace bst {
 
 template <typename DataType, typename KeyType>
-BinarySearchTree<DataType, KeyType>::BinarySearchTree(void) : raw_pointer{nullptr} {}
-
-template <typename DataType, typename KeyType>
-BinarySearchTree<DataType, KeyType>::BinarySearchTree(DataConstReference _data, KeyConstReference _key)
-    : BinarySearchTree() {
-    raw_pointer = new Node(_data, _key);
-}
-
-template <typename DataType, typename KeyType>
-BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {}
-
-template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data, KeyConstReference _key) {
     Node* pointerFather = raw_pointer;
     int controlVariable = -1;
@@ -143,7 +131,9 @@ void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* p
 }
 
 template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::clear(void) {}
+void BinarySearchTree<DataType, KeyType>::clear(void) {
+    std::cout << "foi\n";
+}
 
 template <typename DataType, typename KeyType>
 DataType BinarySearchTree<DataType, KeyType>::median(void) {}

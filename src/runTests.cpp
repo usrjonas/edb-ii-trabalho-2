@@ -15,7 +15,9 @@ int main(int argc, char *argv[]) {
     Executor<int, int> executor(tree);
 
     // Inicia a execução
-    executor.start(argv[1], argv[2]);
+    std::string insertionFileName(argv[1]);
+    std::string commandFileName(argv[2]);
+    executor.start(insertionFileName, commandFileName);
 
     return 0;
 }

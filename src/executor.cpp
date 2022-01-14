@@ -1,11 +1,5 @@
 #include "../include/executor.h"
 
-#include <iostream>
-#include <istream>
-#include <ostream>
-#include <queue>
-#include <sstream>
-
 void verifyIfStringContainsOnlyNumbers(const std::string& str) {
     if (str.find_first_not_of("0123456789 ") != std::string::npos) {
         std::cerr << "ERRO :: String possui caracteres inválidos." << std::endl;
@@ -14,7 +8,9 @@ void verifyIfStringContainsOnlyNumbers(const std::string& str) {
 }
 
 template <typename DataType, typename KeyType>
-Executor<DataType, KeyType>::Executor(bst::BinarySearchTree<DataType, KeyType>& tree) : tree{&tree}, leave{false} {}
+void Executor<DataType, KeyType>::test(void) {
+    std::cout << "consegui\n" << std::endl;
+}
 
 template <typename DataType, typename KeyType>
 void Executor<DataType, KeyType>::start(std::string insertionFileName, std::string commandFileName) {
