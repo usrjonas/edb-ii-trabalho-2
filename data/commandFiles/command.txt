@@ -20,4 +20,4 @@ aqui eu posso escrever o que quiser. :)
 comando de execução:
 clear ; g++ -Wall -pedantic -std=c++11 -fsanitize=address -I include src/runTests.cpp -o build/runTests
 
-./build/runTests data/inserionFiles/insertion.txt data/commandFiles/command.txt
+./build/runTests data/insertionFiles/insertion.txt data/commandFiles/command.txt
