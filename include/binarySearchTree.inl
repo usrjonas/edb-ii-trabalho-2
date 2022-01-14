@@ -37,7 +37,7 @@ void BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data, KeyCo
 }
 
 template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::remove(DataConstReference _data, KeyConstReference _key) {
+void BinarySearchTree<DataType, KeyType>::remove(KeyConstReference _key) {
     Node* pointerFather = nullptr;
     Node* pointerSon = raw_pointer;
 
@@ -51,7 +51,7 @@ void BinarySearchTree<DataType, KeyType>::remove(DataConstReference _data, KeyCo
         const bool sonHasEmptyLeftSubTree = pointerSon->left == nullptr;
         const bool sonHasEmptyRightSubTree = pointerSon->right == nullptr;
 
-        const bool sonIsLeft = pointerFather->left == pointerSon;
+        const bool isSonLeft = pointerFather->left == pointerSon;
 
         if (sonHasEmptyLeftSubTree && sonHasEmptyRightSubTree) {
             if (pointerFather == nullptr) {
@@ -105,8 +105,9 @@ template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerSon, int& controlVariable) {
     Node* pointerFather = nullptr;
     int position = 0;
+    bool isSonLeft = true;
 
-    search(_key, pointerFather, pointerSon, position, controlVariable);
+    search(_key, pointerFather, pointerSon, position, controlVariable, isSonLeft);
 }
 
 template <typename DataType, typename KeyType>
@@ -136,7 +137,7 @@ void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* p
                 }
             }
             if (controlVariable < 1) {
-                search(_key, pointerFather, pointerSon, position, controlVariable);
+                search(_key, pointerFather, pointerSon, position, controlVariable, isSonLeft);
             }
         }
     }
@@ -148,15 +149,15 @@ void BinarySearchTree<DataType, KeyType>::clear(void) {}
 template <typename DataType, typename KeyType>
 DataType BinarySearchTree<DataType, KeyType>::median(void) {}
 
-/* template <typename DataType, typename KeyType>
- int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
-     int temp = simetric(tree, _data, 0);
-     if (temp == 0) {
-         std::cout << "Element not found!" << endl;
-     } else {
-         std::cout << "Element in position : " << temp << endl;
-     }
- } */
+template <typename DataType, typename KeyType>
+int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
+    //  int temp = simetric(tree, _data, 0);
+    //  if (temp == 0) {
+    //      std::cout << "Element not found!" << endl;
+    //  } else {
+    //      std::cout << "Element in position : " << temp << endl;
+    //  }
+}
 
 template <typename DataType, typename KeyType>
 DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {}

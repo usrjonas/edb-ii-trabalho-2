@@ -52,7 +52,7 @@ class BinarySearchTree {
     //=== Methods Modifiers
     void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
     void insert(DataConstReference _data, KeyConstReference _key);
-    void remove(DataConstReference _data, KeyConstReference _key);
+    void remove(KeyConstReference _key);
     void clear(void);
 
     //=== Methods Acess

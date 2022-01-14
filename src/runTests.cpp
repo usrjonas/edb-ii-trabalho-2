@@ -6,7 +6,8 @@
 int main(int argc, char *argv[]) {
     // Validação inicial dos argumentos
     if (argv[1] == nullptr || argv[2] == nullptr) {
-        std::cerr << "ERRO :: Argumentos com o caminho para os arquivos não foi especificado." << std::endl;
+        std::cerr << "ERRO :: Argumentos com o caminho para os arquivos não foi especificado." << std::endl
+                  << std::endl;
         exit(1);
     }
 

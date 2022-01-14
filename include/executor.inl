@@ -2,7 +2,7 @@
 
 void verifyIfStringContainsOnlyNumbers(const std::string& str) {
     if (str.find_first_not_of("0123456789 ") != std::string::npos) {
-        std::cerr << "ERRO :: String possui caracteres inválidos." << std::endl;
+        std::cerr << "ERRO :: String possui caracteres inválidos." << std::endl << std::endl;
         exit(1);
     }
 }
@@ -30,7 +30,7 @@ void Executor<DataType, KeyType>::openAndValideFile(std::ifstream& file, std::st
     file.open(fileName.c_str());
 
     if (!file.is_open()) {
-        std::cerr << "ERRO :: Arquivo " << fileName << " informado é inválido." << std::endl;
+        std::cerr << "ERRO :: Arquivo " << fileName << " informado é inválido." << std::endl << std::endl;
         exit(1);
     }
 
@@ -43,12 +43,12 @@ void Executor<DataType, KeyType>::openAndValideFile(std::ifstream& file, std::st
             numberOfLines++;
 
             if (line.find_first_of("0123456789") == std::string::npos) {
-                std::cerr << "ERRO :: Linha " << numberOfLines << " não possui números." << std::endl;
+                std::cerr << "ERRO :: Linha " << numberOfLines << " não possui números." << std::endl << std::endl;
                 exit(1);
             }
 
             if (line.find_first_not_of("0123456789 ") != std::string::npos) {
-                std::cerr << "ERRO :: Arquivo possui caracteres inválidos." << std::endl;
+                std::cerr << "ERRO :: Arquivo possui caracteres inválidos." << std::endl << std::endl;
                 exit(1);
             }
         }
@@ -62,7 +62,7 @@ void Executor<DataType, KeyType>::processMutipleInserts(std::ifstream& file) {
     std::string str;
     while (std::getline(file, str, ' ')) {
         int value = std::stoi(str);
-        tree->insert(value);
+        tree->insert(value, value);
     }
 }
 
@@ -106,27 +106,27 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     }
 
     else if (commandName == "MEDIANA") {
-        ss << "LOG :: MEDIANA :: A mediana é " << tree->median(std::stoi(str)) << ".";
+        ss << "LOG :: MEDIANA :: A mediana é " << tree->median() << ".";
 
         return ss.str();
     }
 
     else if (commandName == "CHEIA") {
-        str = tree->isFull(std::stoi(str)) ? "não" : "";
+        str = tree->isFull() ? "não" : "";
         ss << "LOG :: CHEIA :: A ávore " << str << " é cheia.";
 
         return ss.str();
     }
 
     else if (commandName == "COMPLETA") {
-        str = tree->isComplete(std::stoi(str)) ? "não" : "";
+        str = tree->isComplete() ? "não" : "";
         ss << "LOG :: CHEIA :: A ávore " << str << " é completa.";
 
         return ss.str();
     }
 
     else if (commandName == "IMPRIMA") {
-        ss << "LOG :: IMPRIMA :: Impressão da árvore: " << tree->toString(std::stoi(str)) << std::endl
+        ss << "LOG :: IMPRIMA :: Impressão da árvore: " << tree->toString() << std::endl
            << "------------------------------------";
 
         return ss.str();
@@ -147,7 +147,8 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         buf >> str;
         verifyIfStringContainsOnlyNumbers(str);
 
-        tree->insert(std::stoi(str));
+        int value = std::stoi(str);
+        tree->insert(value, value);
 
         ss << "LOG :: INSIRA :: Elemento " << str << " inserido.";
 

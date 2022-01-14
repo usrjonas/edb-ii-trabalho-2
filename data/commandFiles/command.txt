@@ -18,10 +18,6 @@ IMPRIMA
 aqui eu posso escrever o que quiser. :)
 
 comando de execução:
-g++ -Wall -pedantic -std=c++11 -fsanitize=address -o build/runTests include/binarySearchTree.h include/executor.h src/binarySearchTree.cpp src/executor.cpp src/runTests.cpp
-./build/runTests data/inserionFiles/insertion.txt data/commandFiles/command.txt
-
 clear ; g++ -Wall -pedantic -std=c++11 -fsanitize=address -I include src/runTests.cpp -o build/runTests
 
-
-src/class/classMatch.cpp src/kenoBet.cpp
+./build/runTests data/inserionFiles/insertion.txt data/commandFiles/command.txt
