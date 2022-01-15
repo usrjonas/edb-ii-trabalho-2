@@ -42,6 +42,7 @@ class BinarySearchTree {
     void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
                 bool& isSonLeft);
     Node* findGreatestElement(Node* pointer);
+    std::string toString(Node* pointer);
 
    public:
     //=== Public interface

@@ -149,7 +149,7 @@ void BinarySearchTree<DataType, KeyType>::clear(void) {}
 template <typename DataType, typename KeyType>
 DataType BinarySearchTree<DataType, KeyType>::median(void) {
     std::vector<Node*> elements;
-    int control, median;
+    int median;
     if (raw_pointer != nullptr) {
         // this->Pre_order(raw_pointer->left);
         elements.push_back(raw_pointer);
@@ -181,9 +181,9 @@ template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
     int temp = simetric(raw_pointer, _key, 0);
     if (temp == 0) {
-        std::cout << "Element not found!" << std::endl;
+        throw(std::string("Element not found!"));
     } else {
-        std::cout << "Element in position : " << temp << std::endl;
+        return temp;
     }
 }
 
@@ -198,25 +198,28 @@ bool BinarySearchTree<DataType, KeyType>::isFull(void) {}
 
 template <typename DataType, typename KeyType>
 std::string BinarySearchTree<DataType, KeyType>::toString(void) {
+    Node* node = raw_pointer;
+    return toString(node) + " ";
+}
+
+template <typename DataType, typename KeyType>
+std::string BinarySearchTree<DataType, KeyType>::toString(Node* pointer) {
     std::queue<Node*> MyQueue;
     Node* node = raw_pointer;
     std::string print_tree;
     MyQueue.push(node);
-    if (!MyQueue.empty()) {
-        while (!MyQueue.empty()) {
-            node = MyQueue.pop();  // try 'front'
-            print_tree += toString(node) + " ";
-            if (node->left != nullptr) {
-                MyQueue.push(node->left);
-            }
-            if (node->right != nullptr) {
-                MyQueue.push(node->right);
-            }
-            return print_tree;
+    while (!MyQueue.empty()) {
+        node = MyQueue.front();
+        MyQueue.pop();
+        print_tree += toString(node) + " ";
+        if (node->left != nullptr) {
+            MyQueue.push(node->left);
         }
-    } else {
-        return "Empty tree";
+        if (node->right != nullptr) {
+            MyQueue.push(node->right);
+        }
     }
+    return print_tree.empty() ? "Empty tree" : print_tree;
 }
 
 template <typename DataType, typename KeyType>

@@ -127,8 +127,13 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     }
 
     else if (commandName == "IMPRIMA") {
-        ss << "LOG :: IMPRIMA :: Impressão da árvore: " << tree->toString() << std::endl
-           << "------------------------------------";
+        try {
+            ss << "LOG :: IMPRIMA :: Impressão da árvore: " << tree->toString() << std::endl
+               << "------------------------------------";
+
+        } catch (std::string e) {
+            std::cerr << e;
+        }
 
         return ss.str();
     }
