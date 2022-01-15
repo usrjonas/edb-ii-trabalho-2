@@ -198,28 +198,35 @@ bool BinarySearchTree<DataType, KeyType>::isFull(void) {}
 
 template <typename DataType, typename KeyType>
 std::string BinarySearchTree<DataType, KeyType>::toString(void) {
-    Node* node = raw_pointer;
-    return toString(node) + " ";
+    return toString(raw_pointer);
 }
 
 template <typename DataType, typename KeyType>
 std::string BinarySearchTree<DataType, KeyType>::toString(Node* pointer) {
-    std::queue<Node*> MyQueue;
-    Node* node = raw_pointer;
-    std::string print_tree;
-    MyQueue.push(node);
-    while (!MyQueue.empty()) {
-        node = MyQueue.front();
-        MyQueue.pop();
-        print_tree += toString(node) + " ";
-        if (node->left != nullptr) {
-            MyQueue.push(node->left);
-        }
-        if (node->right != nullptr) {
-            MyQueue.push(node->right);
-        }
-    }
-    return print_tree.empty() ? "Empty tree" : print_tree;
+    if (pointer == nullptr) return std::string();
+    toString(pointer->left);
+    return std::string(pointer->data + " ");
+    toString(pointer->right);
+
+    // std::queue<Node*> MyQueue; // fila ta vazia
+    // std::string print_tree;
+
+    // MyQueue.push(pointer); // 1 elemento da fila
+
+    // while (!MyQueue.empty()) {
+    //     pointer = MyQueue.front();
+    //     MyQueue.pop(); // lista fica vazia
+
+    //     print_tree += toString(pointer) + " ";
+    //     if (pointer->left != nullptr) {
+    //         MyQueue.push(pointer->left);
+    //     }
+    //     if (pointer->right != nullptr) {
+    //         MyQueue.push(pointer->right);
+    //     }
+    // }
+
+    // return print_tree.empty() ? "Empty tree" : print_tree;
 }
 
 template <typename DataType, typename KeyType>
