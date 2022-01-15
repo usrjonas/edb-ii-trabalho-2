@@ -62,6 +62,7 @@ QUIT
 COMPLETA
 POSICAO 6
 ```
+Nesse caso os comandos abaixo do `QUIT` (`COMPLETA` e `POSICAO`) não serão executados.
 
 O arquivo de entrada deve ser colocado na pasta `data/insertionFiles` e o arquivo de comandos em `data/commandFiles`. Após colocado os arquivos, o projeto pode ser executado através do comando:
 ```
