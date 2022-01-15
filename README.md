@@ -13,7 +13,7 @@ Este projeto foi realizado durante o período 2021.2 do Bacharelado em Tecnologi
 O trabalho foi implementado na linguagem de programação C++. Portanto, para rodar o trabalho, deve-se ter instalado em sua máquina o `GCC (GNU Compiler Collection)` a partir da versão 4.0, pois inclui suporte ao C++ através do `g++`.
 
 Logo, para instalar o compilador em sistemas Unix-like, como o Ubuntu, basta digitar um dos seguintes comandos no terminal (mais recomendado o primeiro):
-```
+```console
 sudo apt install g++
 sudo apt install gcc
 ```
