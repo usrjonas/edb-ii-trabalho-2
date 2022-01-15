@@ -22,7 +22,7 @@ sudo apt install gcc
 
 Para compilar o projeto, entre na pasta do projeto e execute o comando de compilação na pasta raiz do projeto:
 ```sh
-# Entrar na pata do projeto
+# Entrar na pasta raiz do projeto
 cd edb-ii-trabalho-2/
 
 # Compilar o projeto
