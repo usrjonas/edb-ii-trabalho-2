@@ -147,7 +147,34 @@ template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::clear(void) {}
 
 template <typename DataType, typename KeyType>
-DataType BinarySearchTree<DataType, KeyType>::median(void) {}
+DataType BinarySearchTree<DataType, KeyType>::median(void) {
+    vector<int> elements;
+    int control, median;
+    if (raw_pointer != nullptr) {
+        this->Pre_order(raw_pointer->left);
+        elements.push_back(raw_pointer);
+        this->Pre_order(raw_pointer->right);
+    }
+    int vector_Size = elements.size();
+    int j, k;
+    for (int i = 2; i <= vector_Size; i++) {
+        k = elements[i];
+        j = i - 1;
+        elements[0] = k;
+        while (k < elements[j]) {
+            elements[j + 1] = elements[j];
+            j--;
+        }
+        elements[j + 1] = k;
+    }
+    if (vector_Size % 2 == 0) {
+        median = vector_Size / 2;
+        return elements[median - 1];
+    } else {
+        median = (vector_Size + 1) / 2;
+        return elements[median];
+    }
+}
 
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
