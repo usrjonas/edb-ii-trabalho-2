@@ -12,28 +12,43 @@ BinarySearchTree<DataType, KeyType>::BinarySearchTree(DataConstReference _data, 
 }
 
 template <typename DataType, typename KeyType>
-BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {}
+BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {
+    raw_pointer = freeNode(raw_pointer);
+}
+
+template <typename DataType, typename KeyType>
+typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::freeNode(Node* node) {
+    if (node == nullptr) return nullptr;
+
+    node->left = freeNode(node->left);
+    node->right = freeNode(node->right);
+    delete node;
+
+    return nullptr;
+}
 
 template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data, KeyConstReference _key) {
-    Node* pointerFather = raw_pointer;
-    int controlVariable = -1;
+    raw_pointer = insert(raw_pointer, _data, _key);
+}
 
-    search(_key, pointerFather, controlVariable);
-
-    if (controlVariable != 1 && controlVariable != -1) {
-        Node* pointerSon = new Node(_data, _key);
-        if (!controlVariable)
-            raw_pointer = pointerSon;
-        else {
-            if (controlVariable == 2) {
-                pointerFather->left = pointerSon;
-
-            } else {
-                pointerFather->right = pointerSon;
-            }
-        }
+template <typename DataType, typename KeyType>
+typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::insert(
+    Node* pointer, DataConstReference _data, KeyConstReference _key) {
+    if (pointer == nullptr) {
+        pointer = new Node(_data, _key);
+        // pointer->data = _data;
+        // pointer->key = _key;
+        pointer->left = pointer->right = nullptr;
     }
+
+    else if (_key < pointer->key)
+        pointer->left = insert(pointer->left, _data, _key);
+
+    else if (_key > pointer->key)
+        pointer->right = insert(pointer->right, _data, _key);
+
+    return pointer;
 }
 
 template <typename DataType, typename KeyType>
@@ -198,15 +213,18 @@ bool BinarySearchTree<DataType, KeyType>::isFull(void) {}
 
 template <typename DataType, typename KeyType>
 std::string BinarySearchTree<DataType, KeyType>::toString(void) {
-    return toString(raw_pointer);
+    std::stringstream ss;
+    toString(raw_pointer, ss);
+
+    return ss.str();
 }
 
 template <typename DataType, typename KeyType>
-std::string BinarySearchTree<DataType, KeyType>::toString(Node* pointer) {
-    if (pointer == nullptr) return std::string();
-    toString(pointer->left);
-    return std::string(pointer->data + " ");
-    toString(pointer->right);
+void BinarySearchTree<DataType, KeyType>::toString(Node* pointer, std::stringstream& ss) {
+    if (pointer == nullptr) return;
+    toString(pointer->left, ss);
+    ss << pointer->data << " ";
+    toString(pointer->right, ss);
 
     // std::queue<Node*> MyQueue; // fila ta vazia
     // std::string print_tree;
