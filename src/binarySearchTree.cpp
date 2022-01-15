@@ -57,12 +57,7 @@ bool binarySearchTree<DataType, KeyType>::isComplete(void) {}
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
 bool binarySearchTree<DataType, KeyType>::isFull(void) {
-    if (isStrictlyBinaryTree(raw_pointer) and isComplete()) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return isStrictlyBinaryTree(raw_pointer) && isComplete();
 }
 
 template <typename DataType, typename KeyType>
