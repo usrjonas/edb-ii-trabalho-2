@@ -178,12 +178,12 @@ DataType BinarySearchTree<DataType, KeyType>::median(void) {
 
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
-    //  int temp = simetric(tree, _data, 0);
-    //  if (temp == 0) {
-    //      std::cout << "Element not found!" << endl;
-    //  } else {
-    //      std::cout << "Element in position : " << temp << endl;
-    //  }
+    int temp = simetric(tree, _data, 0);
+    if (temp == 0) {
+        std::cout << "Element not found!" << endl;
+    } else {
+        std::cout << "Element in position : " << temp << endl;
+    }
 }
 
 template <typename DataType, typename KeyType>
@@ -218,7 +218,7 @@ std::string BinarySearchTree<DataType, KeyType>::toString(void) {
     }
 }
 
-/* template <typename DataType, typename KeyType>
+template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
     if (source != NULL) {
         cout << "Value:" << source->data << endl;
@@ -230,6 +230,6 @@ int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReferenc
         this->simetric(source->right, key, iteration);
     }
     return 0;
-} */
+}
 
 }  // namespace bst
