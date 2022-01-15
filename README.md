@@ -50,7 +50,9 @@ O arquivo de comando poderá utilizar as operações a seguir:
     INSIRA N
     QUIT
     ```
-OBS: Também pode ser utilizado o "*endpoint*" `QUIT` em um arquivo de comandos para marcar até qual comando você deseja que seja executado os testes. Exemplo:
+Sendo 'N' um número inteiro.
+O `QUIT`, é um comando que não foi requerido pela docente, mas achamos válido implementá-lo. Ele marca até qual comando você deseja que seja executado os testes. Por exemplo:
+
 ```sh
 # Comandos "COMPLETA" e "POSICAO 6" não são executados
 IMPRIMA
