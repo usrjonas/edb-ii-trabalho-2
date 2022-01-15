@@ -3,6 +3,7 @@
 
 #include <iostream>  // st::cout, std::cin, std::endl
 #include <queue>     // std::queue
+#include <sstream>   // std::stringstream
 #include <string>    // std::string
 #include <vector>    // std::vector
 
@@ -42,7 +43,7 @@ class BinarySearchTree {
     void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
                 bool& isSonLeft);
     Node* findGreatestElement(Node* pointer);
-    std::string toString(Node* pointer);
+    void toString(Node* pointer, std::stringstream& ss);
     Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
     Node* freeNode(Node* node);
 
