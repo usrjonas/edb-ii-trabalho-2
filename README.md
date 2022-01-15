@@ -35,7 +35,7 @@ Para execução do projeto devem ser passados dois arquivos como argumentos:
 - O primeiro, chamado de **arquivo de entrada**, deve ser uma sequência de valores inteiros separados por um espaço, os valores a serem armazenados na árvore.
 - O segundo, chamado de **arquivo de comandos**, contém uma sequência de operações (uma operação por linha) a serem realizadas pelo seu algoritmo.
 O arquivo de comando poderá utilizar as operações a seguir:
-    ```sh
+    ```
     *Formato:
     ENESIMO N
     POSICAO N
@@ -53,7 +53,7 @@ O arquivo de comando poderá utilizar as operações a seguir:
     ```
 OBS: Também pode ser utilizado o "*endpoint*" `QUIT` em um arquivo de comandos para marcar até qual comando você deseja que seja executado os testes. Exemplo:
 ```sh
-# Comando "COMPLETA" e "POSICAO 6" não são executados
+# Comandos "COMPLETA" e "POSICAO 6" não são executados
 IMPRIMA
 ENESIMO 4
 MEDIANA
@@ -62,7 +62,7 @@ COMPLETA
 POSICAO 6
 ```
 
-O arquivo de entrada deve ser colocado na pasta `data/insertionFiles` e o arquivo de comandos em `data/commandFiles`. Após colocado os arquivos, o projeto pode ser executado, por exemplo, através do comando:
+O arquivo de entrada deve ser colocado na pasta `data/insertionFiles` e o arquivo de comandos em `data/commandFiles`. Após colocado os arquivos, o projeto pode ser executado através do comando:
 ```
-./build/runTests data/inserionFiles/insertion.txt data/commandFiles/command.txt
+./build/runTests data/insetionFiles/<arquivo_de_entrada> data/commandFiles/<arquivo_de_comandos>
 ```
