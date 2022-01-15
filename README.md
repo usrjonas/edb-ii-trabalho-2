@@ -40,7 +40,6 @@ Ademais, montamos um arquivo de inserção localizado em: `data/insertionFiles/i
 - O segundo, chamado de **arquivo de comandos**, contém uma sequência de operações (uma operação por linha) a serem realizadas pelo seu árvore binária de busca.
 O arquivo de comando poderá utilizar as operações a seguir:
     ```
-    *Formato:
     ENESIMO N
     POSICAO N
     MEDIANA
@@ -49,11 +48,7 @@ O arquivo de comando poderá utilizar as operações a seguir:
     IMPRIMA
     REMOVA N
     INSIRA N
-
-    *Exemplo:
-    IMPRIMA
-    MEDIANA
-    ENESIMO 10
+    QUIT
     ```
 OBS: Também pode ser utilizado o "*endpoint*" `QUIT` em um arquivo de comandos para marcar até qual comando você deseja que seja executado os testes. Exemplo:
 ```sh
