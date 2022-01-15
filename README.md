@@ -32,7 +32,11 @@ g++ -Wall -std=c++11 -g src/runTests.cpp -I include/ -o build/runTests
 ### Execução
 
 Para execução do projeto devem ser passados dois arquivos como argumentos:
-- O primeiro, chamado de **arquivo de entrada**, deve ser uma sequência de valores inteiros separados por um espaço, os valores a serem armazenados na árvore.
+- O primeiro, chamado de **arquivo de entrada**, deve ser uma sequência de valores inteiros separados por um espaço, de modo que não tenha espaços ou linhas extras no final e no início do arquivo. Esses valores informados vão ser inseridos sequencialmente na árvore.
+Por exemplo:
+>51 54 68 57 26 34 85 65 25 84
+
+Ademais, montamos um arquivo de inserção localizado em: `data/insertionFiles/insertion.txt`.
 - O segundo, chamado de **arquivo de comandos**, contém uma sequência de operações (uma operação por linha) a serem realizadas pelo seu algoritmo.
 O arquivo de comando poderá utilizar as operações a seguir:
     ```
