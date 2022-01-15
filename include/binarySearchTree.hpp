@@ -43,6 +43,7 @@ class BinarySearchTree {
                 bool& isSonLeft);
     Node* findGreatestElement(Node* pointer);
     std::string toString(Node* pointer);
+    Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
 
    public:
     //=== Public interface

@@ -16,24 +16,26 @@ BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {}
 
 template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data, KeyConstReference _key) {
-    Node* pointerFather = raw_pointer;
-    int controlVariable = -1;
+    raw_pointer = insert(raw_pointer, _data, _key);
+}
 
-    search(_key, pointerFather, controlVariable);
-
-    if (controlVariable != 1 && controlVariable != -1) {
-        Node* pointerSon = new Node(_data, _key);
-        if (!controlVariable)
-            raw_pointer = pointerSon;
-        else {
-            if (controlVariable == 2) {
-                pointerFather->left = pointerSon;
-
-            } else {
-                pointerFather->right = pointerSon;
-            }
-        }
+template <typename DataType, typename KeyType>
+typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::insert(
+    Node* pointer, DataConstReference _data, KeyConstReference _key) {
+    if (pointer == nullptr) {
+        pointer = new Node(_data, _key);
+        // pointer->data = _data;
+        // pointer->key = _key;
+        pointer->left = pointer->right = nullptr;
     }
+
+    else if (_key < pointer->key)
+        pointer->left = insert(pointer->left, _data, _key);
+
+    else if (_key > pointer->key)
+        pointer->right = insert(pointer->right, _data, _key);
+
+    return pointer;
 }
 
 template <typename DataType, typename KeyType>
