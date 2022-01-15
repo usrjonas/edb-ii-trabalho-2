@@ -196,7 +196,27 @@ template <typename DataType, typename KeyType>
 bool BinarySearchTree<DataType, KeyType>::isFull(void) {}
 
 template <typename DataType, typename KeyType>
-std::string BinarySearchTree<DataType, KeyType>::toString(void) {}
+std::string BinarySearchTree<DataType, KeyType>::toString(void) {
+    queue<DataType> MyQueue;
+    Node* node = raw_pointer;
+    string print_tree;
+    MyQueue.push(node);
+    if (!MyQueue.Empty) {
+        while (!MyQueue.Empty) {
+            node = MyQueue.pop();  // try 'front'
+            print_tree += toString(node->data) + " ";
+            if (node->left != nullptr) {
+                MyQueue.push(node->left);
+            }
+            if (node->right != nullptr) {
+                MyQueue.push(node->right);
+            }
+            return print_tree;
+        }
+    } else {
+        return "Empty tree"
+    }
+}
 
 /* template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
