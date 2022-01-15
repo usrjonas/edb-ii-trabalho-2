@@ -20,14 +20,15 @@ void Executor<DataType, KeyType>::start(std::string insertionFileName, std::stri
 
     std::string line;
     while (not leave && std::getline(commandFile, line)) {
-        std::cout << processLine(line) << std::endl << std::endl;
+        std::cout << std::endl << processLine(line) << std::endl;
     }
+    std::cout << std::endl;
 }
 
 template <typename DataType, typename KeyType>
 void Executor<DataType, KeyType>::openAndValideFile(std::ifstream& file, std::string fileName,
                                                     bool mustValidateNumbers) {
-    file.open(fileName.c_str());
+    file.open(fileName.c_str(), std::ios_base::in);
 
     if (!file.is_open()) {
         std::cerr << "ERRO :: Arquivo " << fileName << " informado é inválido." << std::endl << std::endl;

@@ -2,6 +2,7 @@
 #define _EXECUTOR_H_
 
 #include <fstream>   // std::ifstream
+#include <ios>       // ios_base::in
 #include <iostream>  // st::cout, std::cin, std::endl
 #include <istream>   // std::istringstream
 #include <sstream>   // std::stringstream

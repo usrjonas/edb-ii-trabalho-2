@@ -21,7 +21,7 @@ void BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data, KeyCo
 
     search(_key, pointerFather, controlVariable);
 
-    if (controlVariable != 1 || controlVariable != -1) {
+    if (controlVariable != 1 && controlVariable != -1) {
         Node* pointerSon = new Node(_data, _key);
         if (!controlVariable)
             raw_pointer = pointerSon;
