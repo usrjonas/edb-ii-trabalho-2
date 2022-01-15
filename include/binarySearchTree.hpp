@@ -1,7 +1,8 @@
 #ifndef _BINARY_SEARCH_TREE_H_
 #define _BINARY_SEARCH_TREE_H_
 
-#include <string>  // std::string
+#include <iostream>  // st::cout, std::cin, std::endl
+#include <string>    // std::string
 
 namespace bst {  // binary search tree
 
@@ -12,7 +13,7 @@ namespace bst {  // binary search tree
  * @tparam KeyType Type of key the container will store.
  */
 template <typename DataType, typename KeyType>
-class binarySearchTree {
+class BinarySearchTree {
    private:
     //=== The data node.
     struct Node {
@@ -36,18 +37,23 @@ class binarySearchTree {
    private:
     Node* raw_pointer;
 
+    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
+                bool& isSonLeft);
+    Node* findGreatestElement(Node* pointer);
+
    public:
     //=== Public interface
 
     //=== Constructors and Destructors
-    binarySearchTree(void);
-    binarySearchTree(DataConstReference _data, KeyConstReference _key) : binarySearchTree();
-    ~binarySearchTree(void);
+    BinarySearchTree(void);
+    BinarySearchTree(DataConstReference _data, KeyConstReference _key);
+    ~BinarySearchTree(void);
 
     //=== Methods Modifiers
-    Node* insert(DataConstReference _data, KeyConstReference _key);
-    Node* remove(DataConstReference _data, KeyConstReference _key);
-    Node* clear(void);
+    void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
+    void insert(DataConstReference _data, KeyConstReference _key);
+    void remove(KeyConstReference _key);
+    void clear(void);
 
     //=== Methods Acess
     DataType median(void);
@@ -61,4 +67,5 @@ class binarySearchTree {
 
 }  // namespace bst
 
+#include "binarySearchTree.inl"
 #endif  // _BINARY_SEARCH_TREE_H_
