@@ -44,6 +44,7 @@ class BinarySearchTree {
     Node* findGreatestElement(Node* pointer);
     std::string toString(Node* pointer);
     Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
+    Node* freeNode(Node* node);
 
    public:
     //=== Public interface

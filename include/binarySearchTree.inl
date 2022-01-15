@@ -12,7 +12,20 @@ BinarySearchTree<DataType, KeyType>::BinarySearchTree(DataConstReference _data, 
 }
 
 template <typename DataType, typename KeyType>
-BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {}
+BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {
+    raw_pointer = freeNode(raw_pointer);
+}
+
+template <typename DataType, typename KeyType>
+typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::freeNode(Node* node) {
+    if (node == nullptr) return nullptr;
+
+    node->left = freeNode(node->left);
+    node->right = freeNode(node->right);
+    delete node;
+
+    return nullptr;
+}
 
 template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data, KeyConstReference _key) {
