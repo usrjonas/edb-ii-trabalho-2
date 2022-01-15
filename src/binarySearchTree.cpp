@@ -34,10 +34,9 @@ binarySearchTree<DataType, KeyType>::Node* binarySearchTree<DataType, KeyType>::
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
 DataType binarySearchTree<DataType, KeyType>::median(void) {}
-//87265134
+
 // TODO: Fazer documentação doxygen
 template <typename DataType, typename KeyType>
-//position
 int binarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {}
 
 // TODO: Fazer documentação doxygen
@@ -59,25 +58,24 @@ std::string binarySearchTree<DataType, KeyType>::toString(void) {
     Node* node = raw_pointer;
     string print_tree;
     MyQueue.push(node);
-    if(!MyQueue.Empty){
-        while(!MyQueue.Empty){
-            node = MyQueue.pop(); //try 'front'
+    if (!MyQueue.Empty) {
+        while (!MyQueue.Empty) {
+            node = MyQueue.pop();  // try 'front'
             print_tree += toString(node->data) + " ";
-            if(node->left != nullptr){
+            if (node->left != nullptr) {
                 MyQueue.push(node->left);
             }
-            if(node->right != nullptr){
+            if (node->right != nullptr) {
                 MyQueue.push(node->right);
             }
             return print_tree;
         }
-    }else{
+    } else {
         return "Empty tree"
     }
 }
 
 // TODO: Fazer documentação doxygen
-/*
 template <typename DataType, typename KeyType>
 int binarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
     if (source != NULL) {
@@ -90,6 +88,5 @@ int binarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReferenc
     }
     return 0;
 }
-*/
 
 }  // namespace bst
