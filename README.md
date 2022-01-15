@@ -37,7 +37,7 @@ Por exemplo:
 >51 54 68 57 26 34 85 65 25 84
 
 Ademais, montamos um arquivo de inserção localizado em: `data/insertionFiles/insertion.txt`.
-- O segundo, chamado de **arquivo de comandos**, contém uma sequência de operações (uma operação por linha) a serem realizadas pelo seu algoritmo.
+- O segundo, chamado de **arquivo de comandos**, contém uma sequência de operações (uma operação por linha) a serem realizadas pelo seu árvore binária de busca.
 O arquivo de comando poderá utilizar as operações a seguir:
     ```
     *Formato:
