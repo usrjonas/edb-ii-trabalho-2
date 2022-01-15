@@ -2,7 +2,9 @@
 #define _BINARY_SEARCH_TREE_H_
 
 #include <iostream>  // st::cout, std::cin, std::endl
+#include <queue>     // std::queue
 #include <string>    // std::string
+#include <vector>    // std::vector
 
 namespace bst {  // binary search tree
 

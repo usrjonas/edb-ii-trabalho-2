@@ -148,20 +148,21 @@ void BinarySearchTree<DataType, KeyType>::clear(void) {}
 
 template <typename DataType, typename KeyType>
 DataType BinarySearchTree<DataType, KeyType>::median(void) {
-    vector<int> elements;
+    std::vector<Node*> elements;
     int control, median;
     if (raw_pointer != nullptr) {
-        this->Pre_order(raw_pointer->left);
+        // this->Pre_order(raw_pointer->left);
         elements.push_back(raw_pointer);
-        this->Pre_order(raw_pointer->right);
+        // this->Pre_order(raw_pointer->right);
     }
     int vector_Size = elements.size();
-    int j, k;
+    int j;
+    Node* k;
     for (int i = 2; i <= vector_Size; i++) {
         k = elements[i];
         j = i - 1;
         elements[0] = k;
-        while (k < elements[j]) {
+        while (k->key < elements[j]->key) {
             elements[j + 1] = elements[j];
             j--;
         }
@@ -169,20 +170,20 @@ DataType BinarySearchTree<DataType, KeyType>::median(void) {
     }
     if (vector_Size % 2 == 0) {
         median = vector_Size / 2;
-        return elements[median - 1];
+        return elements[median - 1]->key;
     } else {
         median = (vector_Size + 1) / 2;
-        return elements[median];
+        return elements[median]->key;
     }
 }
 
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
-    int temp = simetric(tree, _data, 0);
+    int temp = simetric(raw_pointer, _key, 0);
     if (temp == 0) {
-        std::cout << "Element not found!" << endl;
+        std::cout << "Element not found!" << std::endl;
     } else {
-        std::cout << "Element in position : " << temp << endl;
+        std::cout << "Element in position : " << temp << std::endl;
     }
 }
 
@@ -197,14 +198,14 @@ bool BinarySearchTree<DataType, KeyType>::isFull(void) {}
 
 template <typename DataType, typename KeyType>
 std::string BinarySearchTree<DataType, KeyType>::toString(void) {
-    queue<DataType> MyQueue;
+    std::queue<Node*> MyQueue;
     Node* node = raw_pointer;
-    string print_tree;
+    std::string print_tree;
     MyQueue.push(node);
-    if (!MyQueue.Empty) {
-        while (!MyQueue.Empty) {
+    if (!MyQueue.empty()) {
+        while (!MyQueue.empty()) {
             node = MyQueue.pop();  // try 'front'
-            print_tree += toString(node->data) + " ";
+            print_tree += toString(node) + " ";
             if (node->left != nullptr) {
                 MyQueue.push(node->left);
             }
@@ -214,14 +215,14 @@ std::string BinarySearchTree<DataType, KeyType>::toString(void) {
             return print_tree;
         }
     } else {
-        return "Empty tree"
+        return "Empty tree";
     }
 }
 
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
     if (source != NULL) {
-        cout << "Value:" << source->data << endl;
+        std::cout << "Value:" << source->data << std::endl;
         if (source->data == key) {
             return iteration;
         }
