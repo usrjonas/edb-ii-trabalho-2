@@ -64,5 +64,5 @@ POSICAO 6
 
 O arquivo de entrada deve ser colocado na pasta `data/insertionFiles` e o arquivo de comandos em `data/commandFiles`. Após colocado os arquivos, o projeto pode ser executado através do comando:
 ```
-./build/runTests data/insetionFiles/<arquivo_de_entrada> data/commandFiles/<arquivo_de_comandos>
+./build/runTests data/insertionFiles/<arquivo_de_entrada> data/commandFiles/<arquivo_de_comandos>
 ```
