@@ -162,33 +162,36 @@ template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::clear(void) {}
 
 template <typename DataType, typename KeyType>
+void BinarySearchTree<DataType, KeyType>::Run_order(Node* node, std::vector<Node*> &dados){
+    if(node != nullptr){
+        this->Run_order(node->left,dados);
+        dados.push_back(node);
+        this->Run_order(node->right,dados);
+    }
+}
+
+template <typename DataType, typename KeyType>
 DataType BinarySearchTree<DataType, KeyType>::median(void) {
     std::vector<Node*> elements;
     int median;
-    if (raw_pointer != nullptr) {
-        // this->Pre_order(raw_pointer->left);
-        elements.push_back(raw_pointer);
-        // this->Pre_order(raw_pointer->right);
-    }
+    Run_order(raw_pointer,elements);
     int vector_Size = elements.size();
-    int j;
     Node* k;
-    for (int i = 2; i <= vector_Size; i++) {
-        k = elements[i];
-        j = i - 1;
-        elements[0] = k;
-        while (k->key < elements[j]->key) {
-            elements[j + 1] = elements[j];
-            j--;
+    for(int i = 0; i < vector_Size-1; i++){
+        for(int j = 0;j-i-1; j++){
+            if(elements[j] > elements[j+1]){
+                Node* temp = elements[j];
+                elements[j] = elements[j+1];
+                elements[j+1] = temp;
+            }
         }
-        elements[j + 1] = k;
     }
-    if (vector_Size % 2 == 0) {
+    if(vector_Size % 2 == 0){
         median = vector_Size / 2;
-        return elements[median - 1]->key;
-    } else {
+        return elements[median - 2]->data;
+    }else{
         median = (vector_Size + 1) / 2;
-        return elements[median]->key;
+        return elements[median-2]->data;
     }
 }
 
