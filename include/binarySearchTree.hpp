@@ -46,6 +46,7 @@ class BinarySearchTree {
     void toString(Node* pointer, std::stringstream& ss);
     Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
     Node* freeNode(Node* node);
+    void Run_order(Node* node, std::vector<Node*> &dados);
 
    public:
     //=== Public interface
