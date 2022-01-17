@@ -8,14 +8,14 @@
 ## ✅ Implementações
 
 **Operações básicas**
-- [] Método de busca
-- [] Método de inserção
-- [] Método de remoção
+- [] Método de busca: `search()`
+- [x] Método de inserção: `insert()`
+- [] Método de remoção: `remove()`
 
 **Operações avançadas**
-- [] enesimoElemento()
-- [] posicao()
-- [] mediana()
-- [] ehCheia()
-- [] ehCompleta()
-- [] toString()
+- [] Método que retorna um elemento a partir da posição: `elementInPosition()`
+- [] Método que retorna a posição de um elemento: `findPositionOfElement()`
+- [] Método que retorna a mediana da ABB: `median()`
+- [] Método que informa se a ávore é Cheia: `isFull()`
+- [] Método que informa se a ávore é Completa: `isComplete()`
+- [] Método que retorna uma String da ABB em percorrimento por nível: `toString()`

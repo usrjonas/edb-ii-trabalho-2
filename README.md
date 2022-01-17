@@ -34,9 +34,7 @@ g++ -std=c++11 src/runTests.cpp -I include/ -o build/runTests
 Para execução do projeto devem ser passados dois arquivos como argumentos:
 - O primeiro, chamado de **arquivo de entrada**, deve ser uma sequência de valores inteiros separados por um espaço, de modo que não tenha espaços ou linhas extras no final e no início do arquivo. Esses valores informados vão ser inseridos sequencialmente na árvore.
 Por exemplo:
->51 54 68 57 26 34 85 65 25 84
-
-Ademais, montamos um arquivo de inserção localizado em: `data/insertionFiles/insertion.txt`.
+    >51 54 68 57 26 34 85 65 25 84
 - O segundo, chamado de **arquivo de comandos**, contém uma sequência de operações (uma operação por linha) a serem realizadas pelo seu árvore binária de busca.
 O arquivo de comando poderá utilizar as operações a seguir:
     ```
@@ -50,21 +48,21 @@ O arquivo de comando poderá utilizar as operações a seguir:
     INSIRA N
     QUIT
     ```
-Sendo 'N' um número inteiro.
-O `QUIT`, é um comando que não foi requerido pela docente, mas achamos válido implementá-lo. Ele marca até qual comando você deseja que seja executado os testes. Por exemplo:
-
-```sh
-# Comandos "COMPLETA" e "POSICAO 6" não são executados
-IMPRIMA
-ENESIMO 4
-MEDIANA
-QUIT
-COMPLETA
-POSICAO 6
-```
-Nesse caso os comandos abaixo do `QUIT` (`COMPLETA` e `POSICAO`) não serão executados.
+    Sendo 'N' um número inteiro.
+    
+    O `QUIT`, é um comando que não foi requerido pela docente, mas achamos válido implementá-lo. Ele marca até qual comando você deseja que seja executado os testes. Por exemplo:
+    ```sh
+    IMPRIMA
+    ENESIMO 4
+    MEDIANA
+    QUIT
+    COMPLETA
+    POSICAO 6
+    ```
+    Nesse caso os comandos abaixo do `QUIT` (`COMPLETA` e `POSICAO`) não serão executados.
 
 O arquivo de entrada deve ser colocado na pasta `data/insertionFiles` e o arquivo de comandos em `data/commandFiles`. Após colocado os arquivos, o projeto pode ser executado através do comando:
 ```
 ./build/runTests data/insertionFiles/<arquivo_de_entrada> data/commandFiles/<arquivo_de_comandos>
 ```
+Ademais, montamos um arquivo de entrada localizado em: `data/insertionFiles/insertion.txt` e um arquivo de comandos localizado em: `data/commandFiles/command.txt`.

@@ -90,7 +90,7 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         buf >> str;
         verifyIfStringContainsOnlyNumbers(str);
 
-        ss << "LOG :: ENESIMO :: Elemento que ocupa a " << str << " possição é "
+        ss << "LOG :: ENESIMO :: Elemento que ocupa a " << str << " posição é "
            << tree->elementInPosition(std::stoi(str)) << ".";
 
         return ss.str();
