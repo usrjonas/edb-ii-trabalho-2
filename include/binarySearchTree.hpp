@@ -40,13 +40,13 @@ class BinarySearchTree {
    private:
     Node* raw_pointer;
 
-    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
-                bool& isSonLeft);
+    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon,
+                int& position, int& controlVariable, bool& isSonLeft);
     Node* findGreatestElement(Node* pointer);
     void toString(Node* pointer, std::stringstream& ss);
     Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
     Node* freeNode(Node* node);
-    void Run_order(Node* node, std::vector<Node*> &dados);
+    void preOrder(Node* node, std::vector<Node*> &dados);
 
    public:
     //=== Public interface
