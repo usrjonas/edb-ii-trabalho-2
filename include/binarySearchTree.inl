@@ -2,6 +2,10 @@
 
 namespace bst {
 
+/*****************************************************************************
+ * Constructors and Destructors
+ ****************************************************************************/
+
 template <typename DataType, typename KeyType>
 BinarySearchTree<DataType, KeyType>::BinarySearchTree(void) : raw_pointer{nullptr} {}
 
@@ -12,12 +16,8 @@ BinarySearchTree<DataType, KeyType>::BinarySearchTree(DataConstReference _data, 
 }
 
 template <typename DataType, typename KeyType>
-BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {
-    raw_pointer = freeNode(raw_pointer);
-}
-
-template <typename DataType, typename KeyType>
-typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::freeNode(Node* node) {
+typename BinarySearchTree<DataType, KeyType>::Node*
+BinarySearchTree<DataType, KeyType>::freeNode(Node* node) {
     if (node == nullptr) return nullptr;
 
     node->left = freeNode(node->left);
@@ -28,27 +28,44 @@ typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, K
 }
 
 template <typename DataType, typename KeyType>
+BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {
+    raw_pointer = freeNode(raw_pointer);
+}
+
+/*****************************************************************************
+ * Modifiers Methods (insert, remove, search and clear)
+ ****************************************************************************/
+
+template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data, KeyConstReference _key) {
     raw_pointer = insert(raw_pointer, _data, _key);
 }
 
 template <typename DataType, typename KeyType>
-typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::insert(
-    Node* pointer, DataConstReference _data, KeyConstReference _key) {
+typename BinarySearchTree<DataType, KeyType>::Node* 
+BinarySearchTree<DataType, KeyType>::insert(Node* pointer, DataConstReference _data, KeyConstReference _key) {
     if (pointer == nullptr) {
         pointer = new Node(_data, _key);
-        // pointer->data = _data;
-        // pointer->key = _key;
         pointer->left = pointer->right = nullptr;
     }
-
-    else if (_key < pointer->key)
+    else if (_key < pointer->key) {
         pointer->left = insert(pointer->left, _data, _key);
-
-    else if (_key > pointer->key)
+    }
+    else if (_key > pointer->key) {
         pointer->right = insert(pointer->right, _data, _key);
-
+    }
     return pointer;
+}
+
+template <typename DataType, typename KeyType>
+typename BinarySearchTree<DataType, KeyType>::Node* 
+BinarySearchTree<DataType, KeyType>::findGreatestElement(Node* pointer) {
+    if (pointer == nullptr)
+        return nullptr;
+    else if (pointer->right == nullptr)
+        return pointer;
+    else
+        return findGreatestElement(pointer->right);
 }
 
 template <typename DataType, typename KeyType>
@@ -106,17 +123,6 @@ void BinarySearchTree<DataType, KeyType>::remove(KeyConstReference _key) {
 }
 
 template <typename DataType, typename KeyType>
-typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::findGreatestElement(
-    Node* pointer) {
-    if (pointer == nullptr)
-        return nullptr;
-    else if (pointer->right == nullptr)
-        return pointer;
-    else
-        return findGreatestElement(pointer->right);
-}
-
-template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerSon, int& controlVariable) {
     Node* pointerFather = nullptr;
     int position = 0;
@@ -161,89 +167,12 @@ void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* p
 template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::clear(void) {}
 
-template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::preOrder(Node* node, std::vector<Node*> &dados){
-    if (node != nullptr) {
-        this->preOrder(node->left, dados);
-        dados.push_back(node);
-        this->preOrder(node->right, dados);
-    }
-}
-
-template <typename DataType, typename KeyType>
-DataType BinarySearchTree<DataType, KeyType>::median(void) {
-    // Recuperar todos os elementos da ABB por pré ordem
-    std::vector<Node*> elements;
-    preOrder(raw_pointer, elements);
-    int vector_size = elements.size();
-
-    /* Calculo da mediana dependente se a ABB
-    possui número de elementos pares ou ímpares */
-    int median_ind;
-    if (vector_size % 2 == 0) {
-        median_ind = (vector_size / 2) - 1;
-        return elements[median_ind]->data;
-    }
-    else {
-        median_ind = vector_size / 2;
-        return elements[median_ind]->data;
-    }
-}
-
-template <typename DataType, typename KeyType>
-int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
-    int temp = simetric(raw_pointer, _key, 0);
-    if (temp == 0) {
-        throw(std::string("Element not found!"));
-    } else {
-        return temp;
-    }
-}
+/*****************************************************************************
+ * Access Methods
+ ****************************************************************************/
 
 template <typename DataType, typename KeyType>
 DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {}
-
-template <typename DataType, typename KeyType>
-bool BinarySearchTree<DataType, KeyType>::isComplete(void) {}
-
-template <typename DataType, typename KeyType>
-bool BinarySearchTree<DataType, KeyType>::isFull(void) {}
-
-template <typename DataType, typename KeyType>
-std::string BinarySearchTree<DataType, KeyType>::toString(void) {
-    std::stringstream ss;
-    toString(raw_pointer, ss);
-
-    return ss.str();
-}
-
-template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::toString(Node* pointer, std::stringstream& ss) {
-    if (pointer == nullptr) return;
-    toString(pointer->left, ss);
-    ss << pointer->data << " ";
-    toString(pointer->right, ss);
-
-    // std::queue<Node*> MyQueue; // fila ta vazia
-    // std::string print_tree;
-
-    // MyQueue.push(pointer); // 1 elemento da fila
-
-    // while (!MyQueue.empty()) {
-    //     pointer = MyQueue.front();
-    //     MyQueue.pop(); // lista fica vazia
-
-    //     print_tree += toString(pointer) + " ";
-    //     if (pointer->left != nullptr) {
-    //         MyQueue.push(pointer->left);
-    //     }
-    //     if (pointer->right != nullptr) {
-    //         MyQueue.push(pointer->right);
-    //     }
-    // }
-
-    // return print_tree.empty() ? "Empty tree" : print_tree;
-}
 
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
@@ -257,6 +186,107 @@ int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReferenc
         this->simetric(source->right, key, iteration);
     }
     return 0;
+}
+
+template <typename DataType, typename KeyType>
+int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
+    int temp = simetric(raw_pointer, _key, 0);
+    if (temp == 0) {
+        throw(std::string("Element not found!"));
+    } else {
+        return temp;
+    }
+}
+
+template <typename DataType, typename KeyType>
+void BinarySearchTree<DataType, KeyType>::preOrderToMedian(Node* node, std::vector<Node*> &dados){
+    if (node != nullptr) {
+        this->preOrderToMedian(node->left, dados);
+        dados.push_back(node);
+        this->preOrderToMedian(node->right, dados);
+    }
+}
+
+template <typename DataType, typename KeyType>
+DataType BinarySearchTree<DataType, KeyType>::median(void) {
+    // Retrieve all ABB elements by pre-order
+    std::vector<Node*> elements;
+    preOrderToMedian(raw_pointer, elements);
+    int vector_size = elements.size();
+
+    /* Median calculation depends on whether
+    ABB has an odd or even number of elements */
+    int median_ind;
+    if (vector_size % 2 == 0) {
+        median_ind = (vector_size / 2) - 1;
+        return elements[median_ind]->data;
+    }
+    else {
+        median_ind = vector_size / 2;
+        return elements[median_ind]->data;
+    }
+}
+
+template <typename DataType, typename KeyType>
+bool BinarySearchTree<DataType, KeyType>::isComplete(void) {}
+
+template <typename DataType, typename KeyType>
+bool BinarySearchTree<DataType, KeyType>::isFull(void) {}
+
+template <typename DataType, typename KeyType>
+void BinarySearchTree<DataType, KeyType>::toStringPerLevel(Node* pointer, std::stringstream& ss) {
+    std::queue<Node*> elements_per_level; // queue is empty
+    
+    // Base Case
+    if (pointer == nullptr) {
+        return;
+    }
+    else {
+        elements_per_level.push(pointer); // add root node to queue
+    }
+
+    while (!elements_per_level.empty()) {
+        // Add the front of queue to ss and remove it from queue
+        Node* current_node = elements_per_level.front();
+        ss << current_node->data << " ";
+        elements_per_level.pop();
+
+        // Put the children in queue
+        if (current_node->left != nullptr) {
+            elements_per_level.push(current_node->left);
+        }
+        if (current_node->right != nullptr) {
+            elements_per_level.push(current_node->right);
+        }
+    }
+}
+
+template <typename DataType, typename KeyType>
+void BinarySearchTree<DataType, KeyType>::toStringSorted(Node* pointer, std::stringstream& ss) {
+    if (pointer == nullptr) return;
+    toStringSorted(pointer->left, ss);
+    ss << pointer->data << " ";
+    toStringSorted(pointer->right, ss);
+}
+
+template <typename DataType, typename KeyType>
+std::string BinarySearchTree<DataType, KeyType>::toString(std::string type) {
+    std::stringstream ss;
+    if (type == "EM NÍVEL") {
+        toStringPerLevel(raw_pointer, ss);
+    }
+    else if (type == "SIMETRICA") {
+        toStringSorted(raw_pointer, ss);
+    }
+
+    // If the tree has no elements
+    if (ss.str().empty()) {
+        return "Árvore vazia";
+    }
+    else {
+        return ss.str();
+    }
+    
 }
 
 }  // namespace bst

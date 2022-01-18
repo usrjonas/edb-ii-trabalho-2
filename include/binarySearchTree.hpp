@@ -40,13 +40,16 @@ class BinarySearchTree {
    private:
     Node* raw_pointer;
 
+    //=== Auxiliaries Methods
+    Node* freeNode(Node* node);
+    Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
+    Node* findGreatestElement(Node* pointer);
     void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon,
                 int& position, int& controlVariable, bool& isSonLeft);
-    Node* findGreatestElement(Node* pointer);
-    void toString(Node* pointer, std::stringstream& ss);
-    Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
-    Node* freeNode(Node* node);
-    void preOrder(Node* node, std::vector<Node*> &dados);
+    int simetric(Node* source, KeyConstReference key, int iteration);
+    void preOrderToMedian(Node* node, std::vector<Node*> &dados);
+    void toStringPerLevel(Node* pointer, std::stringstream& ss);
+    void toStringSorted(Node* pointer, std::stringstream& ss);
 
    public:
     //=== Public interface
@@ -56,20 +59,19 @@ class BinarySearchTree {
     BinarySearchTree(DataConstReference _data, KeyConstReference _key);
     ~BinarySearchTree(void);
 
-    //=== Methods Modifiers
-    void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
+    //=== Modifiers Methods
     void insert(DataConstReference _data, KeyConstReference _key);
     void remove(KeyConstReference _key);
+    void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
     void clear(void);
 
-    //=== Methods Acess
-    DataType median(void);
-    int findPositionOfElement(KeyConstReference _key);
+    //=== Access Methods
     DataType elementInPosition(int position);
+    int findPositionOfElement(KeyConstReference _key);
+    DataType median(void);
     bool isComplete(void);
     bool isFull(void);
-    std::string toString(void);
-    int simetric(Node* source, KeyConstReference key, int iteration);
+    std::string toString(std::string type);
 };
 
 }  // namespace bst
