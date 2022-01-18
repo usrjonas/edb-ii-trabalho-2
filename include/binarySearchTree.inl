@@ -162,33 +162,31 @@ template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::clear(void) {}
 
 template <typename DataType, typename KeyType>
+void BinarySearchTree<DataType, KeyType>::preOrder(Node* node, std::vector<Node*> &dados){
+    if (node != nullptr) {
+        this->preOrder(node->left, dados);
+        dados.push_back(node);
+        this->preOrder(node->right, dados);
+    }
+}
+
+template <typename DataType, typename KeyType>
 DataType BinarySearchTree<DataType, KeyType>::median(void) {
+    // Recuperar todos os elementos da ABB por pré ordem
     std::vector<Node*> elements;
-    int median;
-    if (raw_pointer != nullptr) {
-        // this->Pre_order(raw_pointer->left);
-        elements.push_back(raw_pointer);
-        // this->Pre_order(raw_pointer->right);
+    preOrder(raw_pointer, elements);
+    int vector_size = elements.size();
+
+    /* Calculo da mediana dependente se a ABB
+    possui número de elementos pares ou ímpares */
+    int median_ind;
+    if (vector_size % 2 == 0) {
+        median_ind = (vector_size / 2) - 1;
+        return elements[median_ind]->data;
     }
-    int vector_Size = elements.size();
-    int j;
-    Node* k;
-    for (int i = 2; i <= vector_Size; i++) {
-        k = elements[i];
-        j = i - 1;
-        elements[0] = k;
-        while (k->key < elements[j]->key) {
-            elements[j + 1] = elements[j];
-            j--;
-        }
-        elements[j + 1] = k;
-    }
-    if (vector_Size % 2 == 0) {
-        median = vector_Size / 2;
-        return elements[median - 1]->key;
-    } else {
-        median = (vector_Size + 1) / 2;
-        return elements[median]->key;
+    else {
+        median_ind = vector_size / 2;
+        return elements[median_ind]->data;
     }
 }
 
@@ -249,7 +247,7 @@ void BinarySearchTree<DataType, KeyType>::toString(Node* pointer, std::stringstr
 
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
-    if (source != NULL) {
+    if (source != nullptr) {
         std::cout << "Value:" << source->data << std::endl;
         if (source->data == key) {
             return iteration;
