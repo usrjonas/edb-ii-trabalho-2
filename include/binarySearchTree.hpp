@@ -69,7 +69,7 @@ class BinarySearchTree {
     bool isComplete(void);
     bool isFull(void);
     std::string toString(void);
-    int simetric(Node* source, KeyConstReference key, int iteration);
+    int simetric(Node* source, KeyConstReference key, int &iteration, int &var_controle);
 };
 
 }  // namespace bst
