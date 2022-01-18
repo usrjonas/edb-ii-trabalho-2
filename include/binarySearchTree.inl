@@ -37,8 +37,6 @@ typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, K
     Node* pointer, DataConstReference _data, KeyConstReference _key) {
     if (pointer == nullptr) {
         pointer = new Node(_data, _key);
-        // pointer->data = _data;
-        // pointer->key = _key;
         pointer->left = pointer->right = nullptr;
     }
 
@@ -162,7 +160,7 @@ template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::clear(void) {}
 
 template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::preOrder(Node* node, std::vector<Node*> &dados){
+void BinarySearchTree<DataType, KeyType>::preOrder(Node* node, std::vector<Node*>& dados) {
     if (node != nullptr) {
         this->preOrder(node->left, dados);
         dados.push_back(node);
@@ -183,8 +181,7 @@ DataType BinarySearchTree<DataType, KeyType>::median(void) {
     if (vector_size % 2 == 0) {
         median_ind = (vector_size / 2) - 1;
         return elements[median_ind]->data;
-    }
-    else {
+    } else {
         median_ind = vector_size / 2;
         return elements[median_ind]->data;
     }
