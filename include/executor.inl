@@ -154,7 +154,7 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
 
         tree->remove(std::stoi(str));
 
-        ss << "LOG :: REMOVA :: Elemento " << str << " removido.";
+        ss << "LOG :: REMOVA :: Tentativa de remoção do elemento " << str << ".";
 
         return ss.str();
     }
@@ -166,7 +166,7 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         int value = std::stoi(str);
         tree->insert(value, value);
 
-        ss << "LOG :: INSIRA :: Elemento " << str << " inserido.";
+        ss << "LOG :: INSIRA :: Tentativa de inserção do elemento " << str << ".";
 
         return ss.str();
     }
