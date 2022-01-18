@@ -44,10 +44,10 @@ class BinarySearchTree {
     Node* freeNode(Node* node);
     Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
     Node* findGreatestElement(Node* pointer);
-    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon,
-                int& position, int& controlVariable, bool& isSonLeft);
+    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
+                bool& isSonLeft);
     int simetric(Node* source, KeyConstReference key, int iteration);
-    void preOrderToMedian(Node* node, std::vector<Node*> &dados);
+    void simetricToMedian(Node* node, std::vector<Node*>& dados);
     void toStringPerLevel(Node* pointer, std::stringstream& ss);
     void toStringSorted(Node* pointer, std::stringstream& ss);
 

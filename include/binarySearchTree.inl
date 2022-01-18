@@ -196,11 +196,11 @@ int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference
 }
 
 template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::preOrderToMedian(Node* node, std::vector<Node*>& dados) {
+void BinarySearchTree<DataType, KeyType>::simetricToMedian(Node* node, std::vector<Node*>& dados) {
     if (node != nullptr) {
-        this->preOrderToMedian(node->left, dados);
+        this->simetricToMedian(node->left, dados);
         dados.push_back(node);
-        this->preOrderToMedian(node->right, dados);
+        this->simetricToMedian(node->right, dados);
     }
 }
 
@@ -208,7 +208,7 @@ template <typename DataType, typename KeyType>
 DataType BinarySearchTree<DataType, KeyType>::median(void) {
     // Retrieve all ABB elements by pre-order
     std::vector<Node*> elements;
-    preOrderToMedian(raw_pointer, elements);
+    simetricToMedian(raw_pointer, elements);
     int vector_size = elements.size();
 
     /* Median calculation depends on whether
