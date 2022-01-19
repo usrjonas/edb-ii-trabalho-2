@@ -1,7 +1,11 @@
 #ifndef _BINARY_SEARCH_TREE_H_
 #define _BINARY_SEARCH_TREE_H_
 
-#include <string>  // std::string
+#include <iostream>  // st::cout, std::cin, std::endl
+#include <queue>     // std::queue
+#include <sstream>   // std::stringstream
+#include <string>    // std::string
+#include <vector>    // std::vector
 
 namespace bst {  // binary search tree
 
@@ -12,7 +16,7 @@ namespace bst {  // binary search tree
  * @tparam KeyType Type of key the container will store.
  */
 template <typename DataType, typename KeyType>
-class binarySearchTree {
+class BinarySearchTree {
    private:
     //=== The data node.
     struct Node {
@@ -36,30 +40,41 @@ class binarySearchTree {
    private:
     Node* raw_pointer;
 
+    //=== Auxiliaries Methods
+    Node* freeNode(Node* node);
+    Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
+    Node* findGreatestElement(Node* pointer);
+    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
+                bool& isSonLeft);
+    int simetric(Node* source, KeyConstReference key, int& iteration, int& var_controle);
+    void simetricToMedian(Node* node, std::vector<Node*>& dados);
+    void toStringPerLevel(Node* pointer, std::stringstream& ss);
+    void toStringSorted(Node* pointer, std::stringstream& ss);
+
    public:
     //=== Public interface
 
     //=== Constructors and Destructors
-    binarySearchTree(void);
-    binarySearchTree(DataConstReference _data, KeyConstReference _key) : binarySearchTree();
-    ~binarySearchTree(void);
+    BinarySearchTree(void);
+    BinarySearchTree(DataConstReference _data, KeyConstReference _key);
+    ~BinarySearchTree(void);
 
-    //=== Methods Modifiers
-    Node* insert(DataConstReference _data, KeyConstReference _key);
-    Node* remove(DataConstReference _data, KeyConstReference _key);
-    Node* clear(void);
+    //=== Modifiers Methods
+    void insert(DataConstReference _data, KeyConstReference _key);
+    void remove(KeyConstReference _key);
+    void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
+    void clear(void);
 
-    //=== Methods Acess
-    DataType median(void);
-    int findPositionOfElement(KeyConstReference _key);
+    //=== Access Methods
     DataType elementInPosition(int position);
+    int findPositionOfElement(KeyConstReference _key);
+    DataType median(void);
     bool isComplete(void);
     bool isFull(void);
-    bool isStrictlyBinaryTree(Node* _pt);
-    std::string toString(void);
-    int simetric(Node* source, KeyConstReference key, int iteration);
+    std::string toString(std::string type);
 };
 
 }  // namespace bst
 
+#include "binarySearchTree.inl"
 #endif  // _BINARY_SEARCH_TREE_H_
