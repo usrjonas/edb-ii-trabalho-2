@@ -267,7 +267,7 @@ void BinarySearchTree<DataType, KeyType>::toStringSorted(Node* pointer, std::str
 template <typename DataType, typename KeyType>
 std::string BinarySearchTree<DataType, KeyType>::toString(std::string type) {
     std::stringstream ss;
-    if (type == "EM NÍVEL") {
+    if (type == "EM NIVEL") {
         toStringPerLevel(raw_pointer, ss);
     } else if (type == "SIMETRICA") {
         toStringSorted(raw_pointer, ss);
