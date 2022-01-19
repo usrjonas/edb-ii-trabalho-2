@@ -192,11 +192,8 @@ DataType BinarySearchTree<DataType, KeyType>::median(void) {
 
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
-    //position deve obrigatoriamente começar do 1.
     int position = 1,var_controle = 0;
     simetric(raw_pointer, _key, position, var_controle);
-    //Imprime a posição -> std::cout << "Posição: " << position << std::endl;
-    //std::cout << "Tamanho-auxiliar: " << var_controle << std::endl;
     if (var_controle == 0) {
         std::cout << "Elemento nao encontrado" << std::endl;
         throw(std::string("Element not found!"));
@@ -208,17 +205,17 @@ int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int &iteration, int &var_controle) {
     if(source == nullptr){
-        //std::cout << "Value:" << source->data << std::endl;
         return 0;
     }
     if(source->data == key){
-        //Testa se entra na igualdade -> std::cout << "value entrou aqui--->> " << iteration << std::endl;
         var_controle++;
         return iteration;
     }
-    iteration++;
     if(source->left != nullptr){
         this->simetric(source->left, key, iteration, var_controle);
+    }
+    if(var_controle == 0){
+        iteration++;
     }
     if(source->right != nullptr){
         this->simetric(source->right, key, iteration, var_controle);
