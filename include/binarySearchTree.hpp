@@ -6,6 +6,7 @@
 #include <sstream>   // std::stringstream
 #include <string>    // std::string
 #include <vector>    // std::vector
+#include <cmath>     // std::pow
 
 namespace bst {  // binary search tree
 
@@ -39,17 +40,31 @@ class BinarySearchTree {
     //=== Private members.
    private:
     Node* raw_pointer;
+    int height;
 
     //=== Auxiliaries Methods
+
+    // Release the nodes in the destructor
     Node* freeNode(Node* node);
+    // Insert method recursion
     Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
+    // Method used to remove a node
     Node* findGreatestElement(Node* pointer);
+    // Search method recursion
     void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
                 bool& isSonLeft);
-    int simetric(Node* source, KeyConstReference key, int iteration);
+    // Route in symmetrical order for findPositionOfElement method
+    int simetric(Node* source, KeyConstReference key, int& iteration, int& var_controle);
+    // Route in symmetrical order to calculate the median
     void simetricToMedian(Node* node, std::vector<Node*>& dados);
+    // Useful methods for the isComplete and isFull methods
+    int nodesOnLevel(Node* _pt, int current_level, int level);
+    int get_height(Node* _pt);
+    // Methods for the various ways of printing the tree (toString)
     void toStringPerLevel(Node* pointer, std::stringstream& ss);
     void toStringSorted(Node* pointer, std::stringstream& ss);
+    void toStringHierarchical(const Node* node, bool isLeft, std::stringstream& ss, const std::string& prefix);
+    void toStringHierarchical(Node* pointer, std::stringstream& ss);
 
    public:
     //=== Public interface
@@ -72,7 +87,6 @@ class BinarySearchTree {
     bool isComplete(void);
     bool isFull(void);
     std::string toString(std::string type);
-    int simetric(Node* source, KeyConstReference key, int& iteration, int& var_controle);
 };
 
 }  // namespace bst
