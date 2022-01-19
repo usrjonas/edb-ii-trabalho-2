@@ -132,7 +132,7 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
 
         if (str.empty()) {
             try {
-                ss << "LOG :: IMPRIMA :: Impressão da árvore: " << tree->toString("EM NÍVEL");
+                ss << "LOG :: IMPRIMA :: Impressão da árvore: " << tree->toString("EM NIVEL");
             } catch (std::string e) {
                 std::cerr << e;
             }
