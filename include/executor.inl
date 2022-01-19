@@ -8,7 +8,8 @@ void verifyIfStringContainsOnlyNumbers(const std::string& str) {
 }
 
 template <typename DataType, typename KeyType>
-Executor<DataType, KeyType>::Executor(bst::BinarySearchTree<DataType, KeyType>& tree) : tree{&tree}, leave{false} {}
+Executor<DataType, KeyType>::Executor(bst::BinarySearchTree<DataType, KeyType>& tree) 
+    : tree{&tree}, leave{false} {}
 
 template <typename DataType, typename KeyType>
 void Executor<DataType, KeyType>::start(std::string insertionFileName, std::string commandFileName) {
@@ -127,11 +128,21 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     }
 
     else if (commandName == "IMPRIMA") {
-        try {
-            ss << "LOG :: IMPRIMA :: Impressão da árvore: " << tree->toString();
+        buf >> str;
 
-        } catch (std::string e) {
-            std::cerr << e;
+        if (str.empty()) {
+            try {
+                ss << "LOG :: IMPRIMA :: Impressão da árvore: " << tree->toString("EM NIVEL");
+            } catch (std::string e) {
+                std::cerr << e;
+            }
+        }
+        else if (str == "ORDENADO") {
+            try {
+                ss << "LOG :: IMPRIMA ORDENADO :: Impressão da árvore: " << tree->toString("SIMETRICA");
+            } catch (std::string e) {
+                std::cerr << e;
+            }
         }
 
         return ss.str();
