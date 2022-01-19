@@ -14,7 +14,7 @@
 
 **Operações avançadas**
 - [] Método que retorna um elemento a partir da posição: `elementInPosition()`
-- [] Método que retorna a posição de um elemento: `findPositionOfElement()`
+- [x] Método que retorna a posição de um elemento: `findPositionOfElement()`
 - [x] Método que retorna a mediana da ABB: `median()`
 - [] Método que informa se a ávore é Cheia: `isFull()`
 - [] Método que informa se a ávore é Completa: `isComplete()`
