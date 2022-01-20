@@ -179,21 +179,20 @@ DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {}
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int& iteration,
                                                   int& var_controle) {
-    if (source == nullptr) {
-        return 0;
-    }
-    if (source->data == key) {
-        var_controle++;
-        return iteration;
-    }
-    if (source->left != nullptr) {
-        this->simetric(source->left, key, iteration, var_controle);
-    }
-    if (var_controle == 0) {
-        iteration++;
-    }
-    if (source->right != nullptr) {
-        this->simetric(source->right, key, iteration, var_controle);
+    if (source != nullptr) { 
+        if (source->left != nullptr) {
+            this->simetric(source->left, key, iteration, var_controle);
+        }
+        if (source->data == key) {
+            var_controle++;
+            return iteration;
+        }
+        if (var_controle == 0) {
+            iteration++;
+        }
+        if (source->right != nullptr) {
+            this->simetric(source->right, key, iteration, var_controle);
+        }
     }
     return 0;
 }
@@ -203,8 +202,7 @@ int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference
     int position = 1, var_controle = 0;
     simetric(raw_pointer, _key, position, var_controle);
     if (var_controle == 0) {
-        std::cout << "Elemento nao encontrado" << std::endl;
-        throw(std::string("Element not found!"));
+        return -1;
     } else {
         return position;
     }
@@ -251,8 +249,10 @@ int BinarySearchTree<DataType, KeyType>::nodesOnLevel(Node* _pt, int current_lev
 
 template <typename DataType, typename KeyType>
 bool BinarySearchTree<DataType, KeyType>::isComplete(void) {
-    for (int level = 0; level < height - 1; level++) {
-        if (nodesOnLevel(raw_pointer, 0, level) != std::pow(2, level)) {
+    /* It's not necessary to test the last level as
+    it may have empty nodes. Hence the height-1 */
+    for (int level = 1; level <= height-1; level++) {
+        if (nodesOnLevel(raw_pointer, 1, level) != std::pow(2, level-1)) {
             return false;
         }
     }
