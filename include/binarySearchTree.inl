@@ -182,21 +182,20 @@ DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {}
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int& iteration,
                                                   int& var_controle) {
-    if (source == nullptr) {
-        return 0;
-    }
-    if (source->data == key) {
-        var_controle++;
-        return iteration;
-    }
-    if (source->left != nullptr) {
-        this->simetric(source->left, key, iteration, var_controle);
-    }
-    if (var_controle == 0) {
-        iteration++;
-    }
-    if (source->right != nullptr) {
-        this->simetric(source->right, key, iteration, var_controle);
+    if (source != nullptr) { 
+        if (source->left != nullptr) {
+            this->simetric(source->left, key, iteration, var_controle);
+        }
+        if (source->data == key) {
+            var_controle++;
+            return iteration;
+        }
+        if (var_controle == 0) {
+            iteration++;
+        }
+        if (source->right != nullptr) {
+            this->simetric(source->right, key, iteration, var_controle);
+        }
     }
     return 0;
 }
