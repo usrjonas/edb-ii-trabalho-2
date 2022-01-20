@@ -100,9 +100,16 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     else if (commandName == "POSICAO") {
         buf >> str;
         verifyIfStringContainsOnlyNumbers(str);
+        int position = tree->findPositionOfElement(std::stoi(str));
 
-        ss << "LOG :: POSICAO :: Elemento " << str << " encontra-se na posição "
-           << tree->findPositionOfElement(std::stoi(str)) << ".";
+        if (position >= 1) {
+            ss << "LOG :: POSICAO :: Elemento " << str 
+               << " encontra-se na posição " << position << ".";
+        }
+        else {
+            ss << "LOG :: POSICAO :: Elemento " << str 
+               << " não foi encontrado na árvore.";
+        }
 
         return ss.str();
     }

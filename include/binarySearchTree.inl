@@ -206,8 +206,7 @@ int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference
     int position = 1, var_controle = 0;
     simetric(raw_pointer, _key, position, var_controle);
     if (var_controle == 0) {
-        std::cout << "Elemento nao encontrado" << std::endl;
-        throw(std::string("Element not found!"));
+        return -1;
     } else {
         return position;
     }
