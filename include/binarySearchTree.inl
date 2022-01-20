@@ -250,12 +250,7 @@ int BinarySearchTree<DataType, KeyType>::nodesOnLevel(Node* _pt, int current_lev
 
 template <typename DataType, typename KeyType>
 bool BinarySearchTree<DataType, KeyType>::isComplete(void) {
-    // std::cout << "ALTURA: " << height << std::endl << std::endl;
-
     for (int level = 0; level < height-1; level++) {
-        // std::cout << "Nível: " << level+1 << std::endl;
-        // std::cout << "Número de nós = " << nodesOnLevel(raw_pointer, 0, level) << std::endl;
-        // std::cout << "2^{" << level+1 << "-1} = " << std::pow(2, level) << std::endl << std::endl;
         if (nodesOnLevel(raw_pointer, 0, level) != std::pow(2, level)) {
             return false;
         }
