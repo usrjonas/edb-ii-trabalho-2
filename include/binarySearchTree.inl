@@ -30,8 +30,6 @@ typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, K
 template <typename DataType, typename KeyType>
 BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {
     raw_pointer = freeNode(raw_pointer);
-    height = 0;
-    number_of_nodes = 0;
 }
 
 /*****************************************************************************
