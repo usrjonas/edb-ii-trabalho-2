@@ -1,12 +1,12 @@
 #ifndef _BINARY_SEARCH_TREE_H_
 #define _BINARY_SEARCH_TREE_H_
 
+#include <cmath>     // std::pow
 #include <iostream>  // st::cout, std::cin, std::endl
 #include <queue>     // std::queue
 #include <sstream>   // std::stringstream
 #include <string>    // std::string
 #include <vector>    // std::vector
-#include <cmath>     // std::pow
 
 namespace bst {  // binary search tree
 
@@ -79,7 +79,6 @@ class BinarySearchTree {
     void insert(DataConstReference _data, KeyConstReference _key);
     void remove(KeyConstReference _key);
     void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
-    void clear(void);
 
     //=== Access Methods
     DataType elementInPosition(int position);
