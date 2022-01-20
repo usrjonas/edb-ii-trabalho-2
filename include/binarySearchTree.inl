@@ -7,7 +7,7 @@ namespace bst {
  ****************************************************************************/
 
 template <typename DataType, typename KeyType>
-BinarySearchTree<DataType, KeyType>::BinarySearchTree(void) : raw_pointer{nullptr}, height{0} {}
+BinarySearchTree<DataType, KeyType>::BinarySearchTree(void) : raw_pointer{nullptr}, height{0}, number_of_nodes{0} {}
 
 template <typename DataType, typename KeyType>
 BinarySearchTree<DataType, KeyType>::BinarySearchTree(DataConstReference _data, KeyConstReference _key)
@@ -39,6 +39,7 @@ template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data, KeyConstReference _key) {
     raw_pointer = insert(raw_pointer, _data, _key);
     height = get_height(raw_pointer);
+    number_of_nodes++;
 }
 
 template <typename DataType, typename KeyType>
@@ -120,6 +121,7 @@ void BinarySearchTree<DataType, KeyType>::remove(KeyConstReference _key) {
     }
 
     height = get_height(raw_pointer);
+    number_of_nodes--;
 }
 
 template <typename DataType, typename KeyType>
@@ -240,8 +242,7 @@ template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::nodesOnLevel(Node* _pt, int current_level, int level) {
     if (current_level == level) {
         return (_pt == nullptr) ? 0 : 1;
-    }
-    else if (level > 0) {
+    } else if (level > 1) {
         int nodes_left = nodesOnLevel(_pt->left, current_level + 1, level);
         int node_right = nodesOnLevel(_pt->right, current_level + 1, level);
         return nodes_left + node_right;
@@ -250,7 +251,7 @@ int BinarySearchTree<DataType, KeyType>::nodesOnLevel(Node* _pt, int current_lev
 
 template <typename DataType, typename KeyType>
 bool BinarySearchTree<DataType, KeyType>::isComplete(void) {
-    for (int level = 0; level < height-1; level++) {
+    for (int level = 0; level < height - 1; level++) {
         if (nodesOnLevel(raw_pointer, 0, level) != std::pow(2, level)) {
             return false;
         }
@@ -263,8 +264,7 @@ template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::get_height(Node* _pt) {
     if (_pt == nullptr) {
         return 0;
-    }
-    else {
+    } else {
         // Calculates the height of each subtree
         int left_height = get_height(_pt->left);
         int right_height = get_height(_pt->right);
@@ -272,22 +272,23 @@ int BinarySearchTree<DataType, KeyType>::get_height(Node* _pt) {
         // Returns the highest height between the subtrees
         if (left_height > right_height) {
             return (left_height + 1);
-        }
-        else {
+        } else {
             return (right_height + 1);
         }
     }
 }
 
 template <typename DataType, typename KeyType>
-bool BinarySearchTree<DataType, KeyType>::isFull(void) {}
+bool BinarySearchTree<DataType, KeyType>::isFull(void) {
+    return number_of_nodes == std::pow(2, height) - 1;
+}
 
 template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::toStringHierarchical(const Node* node, bool isLeft,
-                                std::stringstream& ss, const std::string& prefix) {
+void BinarySearchTree<DataType, KeyType>::toStringHierarchical(const Node* node, bool isLeft, std::stringstream& ss,
+                                                               const std::string& prefix) {
     if (node != nullptr) {
         ss << prefix;
-        ss << (isLeft ? "├──" : "└──" );
+        ss << (isLeft ? "├──" : "└──");
 
         // print the value of the node
         ss << node->data << std::endl;

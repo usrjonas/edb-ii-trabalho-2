@@ -41,6 +41,7 @@ class BinarySearchTree {
    private:
     Node* raw_pointer;
     int height;
+    int number_of_nodes;
 
     //=== Auxiliaries Methods
 
