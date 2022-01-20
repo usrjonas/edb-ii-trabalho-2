@@ -114,15 +114,15 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
     }
 
     else if (commandName == "CHEIA") {
-        str = tree->isFull() ? "não" : "";
-        ss << "LOG :: CHEIA :: A ávore " << str << " é cheia.";
+        str = tree->isFull() ? "" : "não ";
+        ss << "LOG :: CHEIA :: A ávore " << str << "é cheia.";
 
         return ss.str();
     }
 
     else if (commandName == "COMPLETA") {
-        str = tree->isComplete() ? "não" : "";
-        ss << "LOG :: CHEIA :: A ávore " << str << " é completa.";
+        str = tree->isComplete() ? "" : "não ";
+        ss << "LOG :: COMPLETA :: A ávore " << str << "é completa.";
 
         return ss.str();
     }
@@ -140,6 +140,13 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         else if (str == "ORDENADO") {
             try {
                 ss << "LOG :: IMPRIMA ORDENADO :: Impressão da árvore: " << tree->toString("SIMETRICA");
+            } catch (std::string e) {
+                std::cerr << e;
+            }
+        }
+        else if (str == "HIERARQUICO") {
+            try {
+                ss << "LOG :: IMPRIMA HIERARQUICO :: Impressão da árvore: " << tree->toString("HIERARQUICA");
             } catch (std::string e) {
                 std::cerr << e;
             }
