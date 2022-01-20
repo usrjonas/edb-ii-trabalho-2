@@ -55,7 +55,7 @@ class BinarySearchTree {
     void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
                 bool& isSonLeft);
     // Route in symmetrical order for findPositionOfElement method
-    int simetric(Node* source, KeyConstReference key, int& iteration, int& var_controle);
+    int simetric(Node* source, KeyConstReference key, int& iteration, bool& var_controle);
     // Route in symmetrical order to calculate the median
     void simetricToMedian(Node* node, std::vector<Node*>& dados);
     // Useful methods for the isComplete and isFull methods
