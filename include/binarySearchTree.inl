@@ -32,7 +32,7 @@ BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {
 }
 
 /*****************************************************************************
- * Modifiers Methods (insert, remove, search and clear)
+ * Modifiers Methods (insert, remove and search)
  ****************************************************************************/
 
 template <typename DataType, typename KeyType>
@@ -166,9 +166,6 @@ void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* p
     }
 }
 
-template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::clear(void) {}
-
 /*****************************************************************************
  * Access Methods
  ****************************************************************************/
@@ -239,19 +236,19 @@ template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::nodesOnLevel(Node* _pt, int current_level, int level) {
     if (current_level == level) {
         return (_pt == nullptr) ? 0 : 1;
-    } else if (level > 1) {
-        int nodes_left = nodesOnLevel(_pt->left, current_level + 1, level);
-        int node_right = nodesOnLevel(_pt->right, current_level + 1, level);
-        return nodes_left + node_right;
     }
+
+    int nodes_left = nodesOnLevel(_pt->left, current_level + 1, level);
+    int node_right = nodesOnLevel(_pt->right, current_level + 1, level);
+    return nodes_left + node_right;
 }
 
 template <typename DataType, typename KeyType>
 bool BinarySearchTree<DataType, KeyType>::isComplete(void) {
     /* It's not necessary to test the last level as
     it may have empty nodes. Hence the height-1 */
-    for (int level = 1; level <= height-1; level++) {
-        if (nodesOnLevel(raw_pointer, 1, level) != std::pow(2, level-1)) {
+    for (int level = 1; level <= height - 1; level++) {
+        if (nodesOnLevel(raw_pointer, 1, level) != std::pow(2, level - 1)) {
             return false;
         }
     }
