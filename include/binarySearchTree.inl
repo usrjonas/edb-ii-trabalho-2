@@ -172,7 +172,7 @@ void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* p
 
 template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::simetricToElement(Node* source, int& iteration, int position,
-                                                           bool& var_controle, DataType& element) {
+                                                           bool& var_controle, KeyType& element) {
     if (source != nullptr) {
         this->simetricToElement(source->left, iteration, position, var_controle, element);
 
@@ -188,7 +188,8 @@ int BinarySearchTree<DataType, KeyType>::simetricToElement(Node* source, int& it
         }
 
         this->simetricToElement(source->right, iteration, position, var_controle, element);
-    }
+    } 
+    return 0;
 }
 
 template <typename DataType, typename KeyType>
@@ -198,7 +199,7 @@ DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {
     int iterator = 1;
     bool var_controle = false;
     DataType key;
-    int teste = simetricToElement(raw_pointer, iterator, position, var_controle, key);
+    simetricToElement(raw_pointer, iterator, position, var_controle, key);
     return key;
 }
 
@@ -225,13 +226,14 @@ template <typename DataType, typename KeyType>
 int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
     int position = 1;
     bool var_controle = false;
+
     simetric(raw_pointer, _key, position, var_controle);
-    if (var_controle == 0) {
-        return -1;
-    } else {
+    
+    if (var_controle == true) {
         return position;
+    } else {
+        return -1;
     }
-    return 0;
 }
 
 template <typename DataType, typename KeyType>
