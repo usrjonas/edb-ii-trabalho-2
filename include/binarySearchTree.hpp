@@ -1,6 +1,7 @@
 #ifndef _BINARY_SEARCH_TREE_H_
 #define _BINARY_SEARCH_TREE_H_
 
+#include <cmath>     // std::pow
 #include <iostream>  // st::cout, std::cin, std::endl
 #include <queue>     // std::queue
 #include <sstream>   // std::stringstream
@@ -39,17 +40,34 @@ class BinarySearchTree {
     //=== Private members.
    private:
     Node* raw_pointer;
+    int height;
+    int number_of_nodes;
 
     //=== Auxiliaries Methods
+
+    // Release the nodes in the destructor
     Node* freeNode(Node* node);
+    // Insert method recursion
     Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
+    // Method used to remove a node
     Node* findGreatestElement(Node* pointer);
+    // Search method recursion
     void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
                 bool& isSonLeft);
-    int simetric(Node* source, KeyConstReference key, int iteration);
+    // Route in symmetrical order for findPositionOfElement method
+    int simetric(Node* source, KeyConstReference key, int& iteration, bool& var_controle);
+    // Route in symmetrical order to calculate the median
     void simetricToMedian(Node* node, std::vector<Node*>& dados);
+    // Route in symmetrical order to calculate the elementInPosition
+    int simetricToElement(Node* source, int& iteration, int position, bool& var_controle, DataType& element);
+    // Useful methods for the isComplete and isFull methods
+    int nodesOnLevel(Node* _pt, int current_level, int level);
+    int get_height(Node* _pt);
+    // Methods for the various ways of printing the tree (toString)
     void toStringPerLevel(Node* pointer, std::stringstream& ss);
     void toStringSorted(Node* pointer, std::stringstream& ss);
+    void toStringHierarchical(const Node* node, bool isLeft, std::stringstream& ss, const std::string& prefix);
+    void toStringHierarchical(Node* pointer, std::stringstream& ss);
 
    public:
     //=== Public interface
@@ -63,7 +81,6 @@ class BinarySearchTree {
     void insert(DataConstReference _data, KeyConstReference _key);
     void remove(KeyConstReference _key);
     void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
-    void clear(void);
 
     //=== Access Methods
     DataType elementInPosition(int position);
@@ -72,8 +89,6 @@ class BinarySearchTree {
     bool isComplete(void);
     bool isFull(void);
     std::string toString(std::string type);
-    int simetric(Node* source, KeyConstReference key, int& iteration, int& var_controle);
-    int simetricToElement(Node* source, int& iteration, int position, bool& var_controle, DataType& element);
 };
 
 }  // namespace bst

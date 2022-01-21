@@ -45,13 +45,16 @@ O arquivo de comando poderá utilizar as operações a seguir:
     COMPLETA
     IMPRIMA
     IMPRIMA ORDENADO
+    IMPRIMA HIERARQUICO
     REMOVA N
     INSIRA N
     QUIT
     ```
     Sendo 'N' um número inteiro.
 
-    O `IMPRIMA ORDENADO` não foi requerido pela docente. O `IMPRIMA` imprime a ABB por nível, já o `IMPRIMA ORDENADO` imprime a ABB de forma ordenada pelo valor da dado (através do percorrimento em ordem simétrica).
+    Adicionamos mais duas formas de impressão da árvore: `IMPRIMA ORDENADO` e `IMPRIMA HIERARQUICO`. Esses métodos não foram requeridos pela docente.
+
+    O `IMPRIMA` mostra a ABB **por nível**, o `IMPRIMA ORDENADO` mostra a ABB de forma ordenada pelo valor do dado (através do percorrimento em **ordem simétrica**) e o `IMPRIMA HIERARQUICO` é a ABB na **representação hierárquica**, por nível, de forma mais visual.
     
     O `QUIT`, é um comando que também não foi requerido pela docente, mas achamos válido implementá-lo. Ele marca até qual comando você deseja que seja executado os testes. Por exemplo:
     ```sh
