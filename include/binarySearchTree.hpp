@@ -55,6 +55,8 @@ class BinarySearchTree {
     Node* findMinimumElement(Node* pointer);
     // Search method recursion
     bool search(Node* pointer, KeyConstReference _key);
+    // Route in symmetrical order to calculate the elementInPosition
+    int simetricToElement(Node* source, int& iteration, int position, bool& var_controle, KeyType& element);
     // Route in symmetrical order for findPositionOfElement method
     int simetric(Node* source, KeyConstReference key, int& iteration, bool& var_controle);
     // Route in symmetrical order to calculate the median
