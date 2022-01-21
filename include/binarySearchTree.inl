@@ -111,45 +111,19 @@ typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, K
 }
 
 template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerSon, int& controlVariable) {
-    Node* pointerFather = nullptr;
-    int position = 0;
-    bool isSonLeft = true;
-
-    search(_key, pointerFather, pointerSon, position, controlVariable, isSonLeft);
+bool BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key) {
+    return search(raw_pointer, _key);
 }
 
 template <typename DataType, typename KeyType>
-void BinarySearchTree<DataType, KeyType>::search(KeyConstReference _key, Node* pointerFather, Node* pointerSon,
-                                                 int& position, int& controlVariable, bool& isSonLeft) {
-    if (pointerSon != nullptr) {
-        if (pointerSon->key == _key) {
-            controlVariable = 1;
-        } else {
-            if (_key < pointerSon->key) {
-                if (pointerSon->left == nullptr) {
-                    controlVariable = 2;
-                } else {
-                    pointerFather = pointerSon;
-                    pointerSon = pointerSon->left;
-                    isSonLeft = true;
-                    position++;
-                }
-            } else {
-                if (pointerSon->right == nullptr) {
-                    controlVariable = 3;
-                } else {
-                    pointerFather = pointerSon;
-                    pointerSon = pointerSon->right;
-                    isSonLeft = false;
-                    position++;
-                }
-            }
-            if (controlVariable < 1) {
-                search(_key, pointerFather, pointerSon, position, controlVariable, isSonLeft);
-            }
-        }
-    }
+bool BinarySearchTree<DataType, KeyType>::search(Node* pointer, KeyConstReference _key) {
+    if (pointer == nullptr) return false;
+
+    if (_key < pointer->key) return search(pointer->left, _key);
+
+    if (_key > pointer->key) return search(pointer->right, _key);
+
+    return true;
 }
 
 /*****************************************************************************
@@ -190,12 +164,12 @@ DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {
 }
 
 template <typename DataType, typename KeyType>
-int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int& iteration,
+int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference _key, int& iteration,
                                                   bool& var_controle) {
     if (source != nullptr) {
-        this->simetric(source->left, key, iteration, var_controle);
+        this->simetric(source->left, _key, iteration, var_controle);
 
-        if (source->data == key) {
+        if (source->key == _key) {
             var_controle = true;
             return iteration;
         }
@@ -203,7 +177,7 @@ int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReferenc
             iteration++;
         }
 
-        this->simetric(source->right, key, iteration, var_controle);
+        this->simetric(source->right, _key, iteration, var_controle);
     }
     return 0;
 }
@@ -243,10 +217,10 @@ DataType BinarySearchTree<DataType, KeyType>::median(void) {
     int median_ind;
     if (vector_size % 2 == 0) {
         median_ind = (vector_size / 2) - 1;
-        return elements[median_ind]->data;
+        return elements[median_ind]->key;
     } else {
         median_ind = vector_size / 2;
-        return elements[median_ind]->data;
+        return elements[median_ind]->key;
     }
 }
 
@@ -305,7 +279,7 @@ void BinarySearchTree<DataType, KeyType>::toStringHierarchical(const Node* node,
         ss << (isLeft ? "├──" : "└──");
 
         // print the value of the node
-        ss << node->data << std::endl;
+        ss << node->key << std::endl;
 
         // enter the next tree level - left and right branch
         toStringHierarchical(node->left, true, ss, prefix + (isLeft ? "│   " : "    "));
@@ -323,7 +297,7 @@ template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::toStringSorted(Node* pointer, std::stringstream& ss) {
     if (pointer == nullptr) return;
     toStringSorted(pointer->left, ss);
-    ss << pointer->data << " ";
+    ss << pointer->key << " ";
     toStringSorted(pointer->right, ss);
 }
 
@@ -341,7 +315,7 @@ void BinarySearchTree<DataType, KeyType>::toStringPerLevel(Node* pointer, std::s
     while (!elements_per_level.empty()) {
         // Add the front of queue to ss and remove it from queue
         Node* current_node = elements_per_level.front();
-        ss << current_node->data << " ";
+        ss << current_node->key << " ";
         elements_per_level.pop();
 
         // Put the children in queue

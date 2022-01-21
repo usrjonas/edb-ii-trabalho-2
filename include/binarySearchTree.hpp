@@ -54,8 +54,7 @@ class BinarySearchTree {
     // Method used to remove a node
     Node* findMinimumElement(Node* pointer);
     // Search method recursion
-    void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
-                bool& isSonLeft);
+    bool search(Node* pointer, KeyConstReference _key);
     // Route in symmetrical order to calculate the elementInPosition
     int simetricToElement(Node* source, int& iteration, int position, bool& var_controle, KeyType& element);
     // Route in symmetrical order for findPositionOfElement method
@@ -82,7 +81,7 @@ class BinarySearchTree {
     //=== Modifiers Methods
     void insert(DataConstReference _data, KeyConstReference _key);
     void remove(KeyConstReference _key);
-    void search(KeyConstReference _key, Node* pointerFather, int& controlVariable);
+    bool search(KeyConstReference _key);
 
     //=== Access Methods
     DataType elementInPosition(int position);

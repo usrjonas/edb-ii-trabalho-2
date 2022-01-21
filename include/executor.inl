@@ -184,6 +184,23 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         return ss.str();
     }
 
+    else if (commandName == "BUSCA") {
+        buf >> str;
+        verifyIfStringContainsOnlyNumbers(str);
+
+        int value = std::stoi(str);
+        bool hasElement = tree->search(value);
+
+        ss << "LOG :: BUSCA :: Elemento " << value;
+
+        if (hasElement)
+            ss << " foi encontrado na árvore.";
+        else
+            ss << " não foi encontrado na árvore.";
+
+        return ss.str();
+    }
+
     else {
         return "LOG :: Comando '" + commandName + "' não reconhecido.";
     }
