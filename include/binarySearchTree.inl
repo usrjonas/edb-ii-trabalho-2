@@ -37,91 +37,77 @@ BinarySearchTree<DataType, KeyType>::~BinarySearchTree(void) {
 
 template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::insert(DataConstReference _data, KeyConstReference _key) {
-    raw_pointer = insert(raw_pointer, _data, _key);
-    height = get_height(raw_pointer);
-    number_of_nodes++;
+    bool wasInserted = false;
+    raw_pointer = insert(raw_pointer, _data, _key, wasInserted);
+
+    if (wasInserted) {
+        height = get_height(raw_pointer);
+        number_of_nodes++;
+    }
 }
 
 template <typename DataType, typename KeyType>
 typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::insert(
-    Node* pointer, DataConstReference _data, KeyConstReference _key) {
+    Node* pointer, DataConstReference _data, KeyConstReference _key, bool& wasInserted) {
     if (pointer == nullptr) {
         pointer = new Node(_data, _key);
         pointer->left = pointer->right = nullptr;
+        wasInserted = true;
     } else if (_key < pointer->key) {
-        pointer->left = insert(pointer->left, _data, _key);
+        pointer->left = insert(pointer->left, _data, _key, wasInserted);
     } else if (_key > pointer->key) {
-        pointer->right = insert(pointer->right, _data, _key);
+        pointer->right = insert(pointer->right, _data, _key, wasInserted);
     }
     return pointer;
 }
 
 template <typename DataType, typename KeyType>
-typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::findGreatestElement(
+typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::findMinimumElement(
     Node* pointer) {
     if (pointer == nullptr)
         return nullptr;
-    else if (pointer->right == nullptr)
+    else if (pointer->left == nullptr)
         return pointer;
     else
-        return findGreatestElement(pointer->right);
+        return findMinimumElement(pointer->left);
 }
 
 template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::remove(KeyConstReference _key) {
-    Node* pointerFather = nullptr;
-    Node* pointerSon = raw_pointer;
+    bool wasRemoved = false;
+    raw_pointer = remove(raw_pointer, _key, wasRemoved);
+    if (wasRemoved) {
+        height = get_height(raw_pointer);
+        number_of_nodes--;
+    }
+}
 
-    int controlVariable = -1;
-    bool isSonLeft = false;
-    int position;
-
-    search(_key, pointerFather, pointerSon, position, controlVariable, isSonLeft);
-
-    if (controlVariable == 1 && pointerSon != nullptr) {
-        const bool sonHasEmptyLeftSubTree = pointerSon->left == nullptr;
-        const bool sonHasEmptyRightSubTree = pointerSon->right == nullptr;
-
-        const bool isSonLeft = pointerFather->left == pointerSon;
-
-        if (sonHasEmptyLeftSubTree && sonHasEmptyRightSubTree) {
-            if (pointerFather == nullptr) {
-                raw_pointer = nullptr;
-            } else if (isSonLeft) {
-                pointerFather->left = nullptr;
-            } else {
-                pointerFather->right = nullptr;
-            }
-        } else if (sonHasEmptyLeftSubTree) {
-            if (pointerFather == nullptr) {
-                raw_pointer = pointerSon->right;
-            } else if (isSonLeft) {
-                pointerFather->left = pointerSon->right;
-            } else {
-                pointerFather->right = pointerSon->right;
-            }
-        } else if (sonHasEmptyRightSubTree) {
-            if (pointerFather == nullptr) {
-                raw_pointer = pointerSon->left;
-            } else if (isSonLeft) {
-                pointerFather->left = pointerSon->left;
-            } else {
-                pointerFather->right = pointerSon->left;
-            }
-        } else {
-            Node* pointerGreatestLeftElement = findGreatestElement(pointerSon->left);
-
-            pointerSon->key = pointerGreatestLeftElement->key;
-            pointerSon->data = pointerGreatestLeftElement->data;
-
-            pointerSon = pointerGreatestLeftElement;
-        }
-
-        delete pointerSon;
+template <typename DataType, typename KeyType>
+typename BinarySearchTree<DataType, KeyType>::Node* BinarySearchTree<DataType, KeyType>::remove(Node* pointer,
+                                                                                                KeyConstReference _key,
+                                                                                                bool& wasRemoved) {
+    Node* nodeTemp;
+    if (pointer == nullptr) return nullptr;
+    if (_key < pointer->key)
+        pointer->left = remove(pointer->left, _key, wasRemoved);
+    else if (_key > pointer->key)
+        pointer->right = remove(pointer->right, _key, wasRemoved);
+    else if (pointer->left && pointer->right) {
+        nodeTemp = findMinimumElement(pointer->right);
+        pointer->key = nodeTemp->key;
+        pointer->data = nodeTemp->data;
+        pointer->right = remove(pointer->right, pointer->key, wasRemoved);
+    } else {
+        nodeTemp = pointer;
+        if (pointer->left == nullptr)
+            pointer = pointer->right;
+        else if (pointer->right == nullptr)
+            pointer = pointer->left;
+        delete nodeTemp;
+        wasRemoved = true;
     }
 
-    height = get_height(raw_pointer);
-    number_of_nodes--;
+    return pointer;
 }
 
 template <typename DataType, typename KeyType>

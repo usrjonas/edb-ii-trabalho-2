@@ -48,9 +48,11 @@ class BinarySearchTree {
     // Release the nodes in the destructor
     Node* freeNode(Node* node);
     // Insert method recursion
-    Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key);
+    Node* insert(Node* pointer, DataConstReference _data, KeyConstReference _key, bool& wasInserted);
+    // Insert method recursion
+    Node* remove(Node* pointer, KeyConstReference _key, bool& wasRemoved);
     // Method used to remove a node
-    Node* findGreatestElement(Node* pointer);
+    Node* findMinimumElement(Node* pointer);
     // Search method recursion
     void search(KeyConstReference _key, Node* pointerFather, Node* pointerSon, int& position, int& controlVariable,
                 bool& isSonLeft);
