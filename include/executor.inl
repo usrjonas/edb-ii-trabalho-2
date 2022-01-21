@@ -8,8 +8,7 @@ void verifyIfStringContainsOnlyNumbers(const std::string& str) {
 }
 
 template <typename DataType, typename KeyType>
-Executor<DataType, KeyType>::Executor(bst::BinarySearchTree<DataType, KeyType>& tree) 
-    : tree{&tree}, leave{false} {}
+Executor<DataType, KeyType>::Executor(bst::BinarySearchTree<DataType, KeyType>& tree) : tree{&tree}, leave{false} {}
 
 template <typename DataType, typename KeyType>
 void Executor<DataType, KeyType>::start(std::string insertionFileName, std::string commandFileName) {
@@ -91,8 +90,13 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         buf >> str;
         verifyIfStringContainsOnlyNumbers(str);
 
-        ss << "LOG :: ENESIMO :: Elemento que ocupa a " << str << " posição é "
-           << tree->elementInPosition(std::stoi(str)) << ".";
+        int posicao = tree->elementInPosition(std::stoi(str));
+
+        if (posicao == -1) {
+            ss << "LOG :: ENESIMO :: Posição inválida";
+        } else {
+            ss << "LOG :: ENESIMO :: Elemento que ocupa a " << str << " posição é " << posicao << ".";
+        }
 
         return ss.str();
     }
@@ -103,12 +107,9 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         int position = tree->findPositionOfElement(std::stoi(str));
 
         if (position >= 1) {
-            ss << "LOG :: POSICAO :: Elemento " << str 
-               << " encontra-se na posição " << position << ".";
-        }
-        else {
-            ss << "LOG :: POSICAO :: Elemento " << str 
-               << " não foi encontrado na árvore.";
+            ss << "LOG :: POSICAO :: Elemento " << str << " encontra-se na posição " << position << ".";
+        } else {
+            ss << "LOG :: POSICAO :: Elemento " << str << " não foi encontrado na árvore.";
         }
 
         return ss.str();
@@ -143,15 +144,13 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
             } catch (std::string e) {
                 std::cerr << e;
             }
-        }
-        else if (str == "ORDENADO") {
+        } else if (str == "ORDENADO") {
             try {
                 ss << "LOG :: IMPRIMA ORDENADO :: Impressão da árvore: " << tree->toString("SIMETRICA");
             } catch (std::string e) {
                 std::cerr << e;
             }
-        }
-        else if (str == "HIERARQUICO") {
+        } else if (str == "HIERARQUICO") {
             try {
                 ss << "LOG :: IMPRIMA HIERARQUICO :: Impressão da árvore: " << tree->toString("HIERARQUICA");
             } catch (std::string e) {
