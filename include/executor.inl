@@ -8,8 +8,7 @@ void verifyIfStringContainsOnlyNumbers(const std::string& str) {
 }
 
 template <typename DataType, typename KeyType>
-Executor<DataType, KeyType>::Executor(bst::BinarySearchTree<DataType, KeyType>& tree) 
-    : tree{&tree}, leave{false} {}
+Executor<DataType, KeyType>::Executor(bst::BinarySearchTree<DataType, KeyType>& tree) : tree{&tree}, leave{false} {}
 
 template <typename DataType, typename KeyType>
 void Executor<DataType, KeyType>::start(std::string insertionFileName, std::string commandFileName) {
@@ -103,12 +102,9 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         int position = tree->findPositionOfElement(std::stoi(str));
 
         if (position >= 1) {
-            ss << "LOG :: POSICAO :: Elemento " << str 
-               << " encontra-se na posição " << position << ".";
-        }
-        else {
-            ss << "LOG :: POSICAO :: Elemento " << str 
-               << " não foi encontrado na árvore.";
+            ss << "LOG :: POSICAO :: Elemento " << str << " encontra-se na posição " << position << ".";
+        } else {
+            ss << "LOG :: POSICAO :: Elemento " << str << " não foi encontrado na árvore.";
         }
 
         return ss.str();
@@ -143,15 +139,13 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
             } catch (std::string e) {
                 std::cerr << e;
             }
-        }
-        else if (str == "ORDENADO") {
+        } else if (str == "ORDENADO") {
             try {
                 ss << "LOG :: IMPRIMA ORDENADO :: Impressão da árvore: " << tree->toString("SIMETRICA");
             } catch (std::string e) {
                 std::cerr << e;
             }
-        }
-        else if (str == "HIERARQUICO") {
+        } else if (str == "HIERARQUICO") {
             try {
                 ss << "LOG :: IMPRIMA HIERARQUICO :: Impressão da árvore: " << tree->toString("HIERARQUICA");
             } catch (std::string e) {
@@ -181,6 +175,23 @@ std::string Executor<DataType, KeyType>::processLine(std::string line) {
         tree->insert(value, value);
 
         ss << "LOG :: INSIRA :: Tentativa de inserção do elemento " << str << ".";
+
+        return ss.str();
+    }
+
+    else if (commandName == "BUSCA") {
+        buf >> str;
+        verifyIfStringContainsOnlyNumbers(str);
+
+        int value = std::stoi(str);
+        bool hasElement = tree->search(value);
+
+        ss << "LOG :: BUSCA :: Elemento " << value;
+
+        if (hasElement)
+            ss << " foi encontrado na árvore.";
+        else
+            ss << " não foi encontrado na árvore.";
 
         return ss.str();
     }
