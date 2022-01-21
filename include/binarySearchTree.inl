@@ -169,31 +169,39 @@ void BinarySearchTree<DataType, KeyType>::clear(void) {}
  ****************************************************************************/
 
 template <typename DataType, typename KeyType>
-DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {}
+DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {
+    int iterator = 1;
+    bool var_controle = false;
+    DataType key;
+    int teste = simetricToElement(raw_pointer,iterator, position,var_controle, key);
+    /*if(position > number_of_nodes){
+        return -1;
+    }*/
+    return key;
+}
 
 template <typename DataType, typename KeyType>
-int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReference key, int iteration) {
+int BinarySearchTree<DataType, KeyType>::simetricToElement(Node* source, int& iteration, int position, bool& var_controle, DataType& element) {
     if (source != nullptr) {
-        std::cout << "Value:" << source->data << std::endl;
-        if (source->data == key) {
+        this->simetricToElement(source->left,iteration,position,var_controle, element);
+
+        if(iteration == position){
+            var_controle = true;
+            element = source->data;
+            iteration++;
             return iteration;
         }
-        iteration++;
-        this->simetric(source->left, key, iteration);
-        this->simetric(source->right, key, iteration);
+
+
+        if(var_controle == false){
+            iteration++;
+        }
+
+        this->simetricToElement(source->right,iteration,position,var_controle, element);
     }
-    return 0;
+    return 0;    
 }
 
-template <typename DataType, typename KeyType>
-int BinarySearchTree<DataType, KeyType>::findPositionOfElement(KeyConstReference _key) {
-    int temp = simetric(raw_pointer, _key, 0);
-    if (temp == 0) {
-        throw(std::string("Element not found!"));
-    } else {
-        return temp;
-    }
-}
 
 template <typename DataType, typename KeyType>
 void BinarySearchTree<DataType, KeyType>::simetricToMedian(Node* node, std::vector<Node*>& dados) {
@@ -257,8 +265,7 @@ int BinarySearchTree<DataType, KeyType>::simetric(Node* source, KeyConstReferenc
     return 0;
 }
 
-template <typename DataType, typename KeyType>
-DataType BinarySearchTree<DataType, KeyType>::elementInPosition(int position) {}
+
 
 template <typename DataType, typename KeyType>
 bool BinarySearchTree<DataType, KeyType>::isComplete(void) {}

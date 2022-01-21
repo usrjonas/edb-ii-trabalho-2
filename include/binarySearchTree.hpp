@@ -73,6 +73,7 @@ class BinarySearchTree {
     bool isFull(void);
     std::string toString(std::string type);
     int simetric(Node* source, KeyConstReference key, int& iteration, int& var_controle);
+    int simetricToElement(Node* source, int& iteration, int position, bool& var_controle, DataType& element);
 };
 
 }  // namespace bst
